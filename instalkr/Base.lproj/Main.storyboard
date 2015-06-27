@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--WELCOME View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" userLabel="WELCOME View Controller" customClass="ViewController" customModule="instalkr" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,11 +16,137 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="incognito" highlightedImage="incognito" translatesAutoresizingMaskIntoConstraints="NO" id="DCI-Aa-jQC">
+                                <rect key="frame" x="116" y="101" width="368" height="182"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="182" id="9yU-Vn-5qm"/>
+                                    <constraint firstAttribute="width" constant="368" id="Z8Q-TE-6cE"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xtQ-SG-xbN">
+                                <rect key="frame" x="180" y="424" width="240" height="45"/>
+                                <color key="backgroundColor" red="0.70349069784315765" green="0.89143386994949492" blue="0.88243450059010364" alpha="0.35000000000000003" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="16"/>
+                                <state key="normal" title="CONTINUE AS GUEST">
+                                    <color key="titleColor" red="0.14191159743618506" green="0.23282318656380038" blue="0.43183791035353536" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="1.5"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="10"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                        <color key="value" red="0.6772586031451947" green="0.98989898989898994" blue="0.98986012131728374" alpha="0.62" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="C4D-gl-qTs" kind="presentation" id="7Ze-Bc-Xch"/>
+                                </connections>
+                            </button>
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hXC-dR-0gO">
+                                <rect key="frame" x="180" y="355" width="240" height="45"/>
+                                <color key="backgroundColor" red="0.91607952146678095" green="0.91481708613364099" blue="0.93686868686868685" alpha="0.5" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="2eF-lc-QXn"/>
+                                    <constraint firstAttribute="width" constant="240" id="fAM-nv-wfI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                <state key="normal" title="LOG IN">
+                                    <color key="titleColor" red="0.18948757572102323" green="0.30294332449432565" blue="0.56315104166666674" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="1.5"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="10"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                        <color key="value" red="0.9144266591300183" green="0.66179119625204885" blue="0.91666666666666663" alpha="0.72999999999999998" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="rAE-TX-o0j" kind="presentation" id="d8b-es-jCm"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xtQ-SG-xbN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="164" id="1ix-lY-WSD"/>
+                            <constraint firstAttribute="centerX" secondItem="DCI-Aa-jQC" secondAttribute="centerX" id="46g-gJ-IGk"/>
+                            <constraint firstItem="DCI-Aa-jQC" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="81" id="79S-Ve-6qp"/>
+                            <constraint firstAttribute="centerX" secondItem="xtQ-SG-xbN" secondAttribute="centerX" id="AoY-Mn-uzL"/>
+                            <constraint firstItem="hXC-dR-0gO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="164" id="Bbl-8P-sPW"/>
+                            <constraint firstItem="hXC-dR-0gO" firstAttribute="width" secondItem="xtQ-SG-xbN" secondAttribute="width" id="Ceu-Xh-YoV"/>
+                            <constraint firstItem="DCI-Aa-jQC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="100" id="Cmg-3F-T8o"/>
+                            <constraint firstItem="hXC-dR-0gO" firstAttribute="top" secondItem="DCI-Aa-jQC" secondAttribute="bottom" constant="72" id="QXf-BG-ADk"/>
+                            <constraint firstItem="xtQ-SG-xbN" firstAttribute="height" secondItem="hXC-dR-0gO" secondAttribute="height" id="VwR-lf-v7C"/>
+                            <constraint firstItem="hXC-dR-0gO" firstAttribute="height" secondItem="xtQ-SG-xbN" secondAttribute="height" id="dbn-21-tb8"/>
+                            <constraint firstAttribute="centerX" secondItem="hXC-dR-0gO" secondAttribute="centerX" id="piU-T3-fG1"/>
+                            <constraint firstItem="xtQ-SG-xbN" firstAttribute="top" secondItem="hXC-dR-0gO" secondAttribute="bottom" constant="24" id="qq6-hs-ura"/>
+                            <constraint firstItem="xtQ-SG-xbN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="164" id="t2Y-YR-PLG"/>
+                            <constraint firstItem="xtQ-SG-xbN" firstAttribute="width" secondItem="hXC-dR-0gO" secondAttribute="width" id="vJS-uj-j5C"/>
+                            <constraint firstItem="xtQ-SG-xbN" firstAttribute="top" secondItem="hXC-dR-0gO" secondAttribute="bottom" constant="23" id="x4O-Bm-hNf"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="xtQ-SG-xbN" secondAttribute="bottom" constant="132" id="ybp-tH-Bdy"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Cmg-3F-T8o"/>
+                                <exclude reference="Bbl-8P-sPW"/>
+                                <exclude reference="Ceu-Xh-YoV"/>
+                                <exclude reference="dbn-21-tb8"/>
+                                <exclude reference="1ix-lY-WSD"/>
+                                <exclude reference="t2Y-YR-PLG"/>
+                                <exclude reference="x4O-Bm-hNf"/>
+                                <exclude reference="ybp-tH-Bdy"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
+        <!--Search View Controller-->
+        <scene sceneID="9Nq-82-DvF">
+            <objects>
+                <viewController id="C4D-gl-qTs" userLabel="Search View Controller" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lBf-ul-9Na"/>
+                        <viewControllerLayoutGuide type="bottom" id="08C-6E-dno"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uXQ-zN-1W4">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4BE-39-kMi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="623" y="1015"/>
+        </scene>
+        <!--LOG IN View Controller-->
+        <scene sceneID="suG-5W-Nqy">
+            <objects>
+                <viewController id="rAE-TX-o0j" userLabel="LOG IN View Controller" customClass="LogInViewController" customModule="instalkr" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="c0H-cX-3rw"/>
+                        <viewControllerLayoutGuide type="bottom" id="6Vl-iH-3ct"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DeK-Cq-wNY">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="C4D-gl-qTs" kind="presentation" identifier="logInToSearch" id="4IQ-NG-yO8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LxQ-xV-Ska" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="972" y="225"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="incognito" width="598" height="300"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="4IQ-NG-yO8"/>
+    </inferredMetricsTieBreakers>
 </document>
