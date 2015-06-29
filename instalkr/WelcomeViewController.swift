@@ -78,17 +78,7 @@ class WelcomeViewController : UIViewController {
             
         })
         
-        /*
-        [UIView transitionFromView:src
-        toView:dst
-        duration:1.5
-        options:UIViewAnimationOptionTransitionCrossDissolve
-        completion:^(BOOL finished){
-        [src removeFromSuperview];
-        window.rootViewController = self.destinationViewController;
-        }];
-        */
-        //UIView.transitionFromView(<#fromView: UIView#>, toView: <#UIView#>, duration: <#NSTimeInterval#>, options: <#UIViewAnimationOptions#>, completion: <#((Bool) -> Void)?##(Bool) -> Void#>)
+       
         
     }
     
