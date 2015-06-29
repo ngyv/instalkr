@@ -8,7 +8,7 @@
         <!--WELCOME View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" userLabel="WELCOME View Controller" customClass="ViewController" customModule="instalkr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" userLabel="WELCOME View Controller" customClass="WelcomeViewController" customModule="instalkr" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -40,7 +40,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="C4D-gl-qTs" kind="presentation" id="7Ze-Bc-Xch"/>
+                                    <segue destination="C4D-gl-qTs" kind="presentation" identifier="welcomeToSearch" id="7Ze-Bc-Xch"/>
                                 </connections>
                             </button>
                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hXC-dR-0gO">
@@ -66,18 +66,26 @@
                                     <segue destination="rAE-TX-o0j" kind="presentation" id="d8b-es-jCm"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome, stalkr !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0FT-3v-ymH">
+                                <rect key="frame" x="201" y="293" width="199" height="52"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="26"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="xtQ-SG-xbN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="164" id="1ix-lY-WSD"/>
                             <constraint firstAttribute="centerX" secondItem="DCI-Aa-jQC" secondAttribute="centerX" id="46g-gJ-IGk"/>
                             <constraint firstItem="DCI-Aa-jQC" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="81" id="79S-Ve-6qp"/>
+                            <constraint firstItem="0FT-3v-ymH" firstAttribute="top" secondItem="DCI-Aa-jQC" secondAttribute="bottom" constant="10" id="AED-od-MdS"/>
                             <constraint firstAttribute="centerX" secondItem="xtQ-SG-xbN" secondAttribute="centerX" id="AoY-Mn-uzL"/>
                             <constraint firstItem="hXC-dR-0gO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="164" id="Bbl-8P-sPW"/>
                             <constraint firstItem="hXC-dR-0gO" firstAttribute="width" secondItem="xtQ-SG-xbN" secondAttribute="width" id="Ceu-Xh-YoV"/>
                             <constraint firstItem="DCI-Aa-jQC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="100" id="Cmg-3F-T8o"/>
                             <constraint firstItem="hXC-dR-0gO" firstAttribute="top" secondItem="DCI-Aa-jQC" secondAttribute="bottom" constant="72" id="QXf-BG-ADk"/>
+                            <constraint firstItem="hXC-dR-0gO" firstAttribute="top" secondItem="0FT-3v-ymH" secondAttribute="bottom" constant="10" id="RR6-DZ-iwg"/>
                             <constraint firstItem="xtQ-SG-xbN" firstAttribute="height" secondItem="hXC-dR-0gO" secondAttribute="height" id="VwR-lf-v7C"/>
+                            <constraint firstAttribute="centerX" secondItem="0FT-3v-ymH" secondAttribute="centerX" id="Ze2-93-smJ"/>
                             <constraint firstItem="hXC-dR-0gO" firstAttribute="height" secondItem="xtQ-SG-xbN" secondAttribute="height" id="dbn-21-tb8"/>
                             <constraint firstAttribute="centerX" secondItem="hXC-dR-0gO" secondAttribute="centerX" id="piU-T3-fG1"/>
                             <constraint firstItem="xtQ-SG-xbN" firstAttribute="top" secondItem="hXC-dR-0gO" secondAttribute="bottom" constant="24" id="qq6-hs-ura"/>
@@ -99,6 +107,12 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="continueAsGuestButton" destination="xtQ-SG-xbN" id="fok-Ml-rfW"/>
+                        <outlet property="incognitoWelcomeImage" destination="DCI-Aa-jQC" id="f5w-1d-pJI"/>
+                        <outlet property="logInButton" destination="hXC-dR-0gO" id="2mQ-er-XcC"/>
+                        <outlet property="welcomeLabel" destination="0FT-3v-ymH" id="juW-qc-qAR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -106,7 +120,7 @@
         <!--Search View Controller-->
         <scene sceneID="9Nq-82-DvF">
             <objects>
-                <viewController id="C4D-gl-qTs" userLabel="Search View Controller" sceneMemberID="viewController">
+                <viewController id="C4D-gl-qTs" userLabel="Search View Controller" customClass="SearchViewController" customModule="instalkr" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lBf-ul-9Na"/>
                         <viewControllerLayoutGuide type="bottom" id="08C-6E-dno"/>
@@ -119,7 +133,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4BE-39-kMi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="623" y="1015"/>
+            <point key="canvasLocation" x="729" y="1141"/>
         </scene>
         <!--LOG IN View Controller-->
         <scene sceneID="suG-5W-Nqy">
@@ -140,13 +154,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LxQ-xV-Ska" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="972" y="225"/>
+            <point key="canvasLocation" x="1104" y="297"/>
         </scene>
     </scenes>
     <resources>
         <image name="incognito" width="598" height="300"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4IQ-NG-yO8"/>
+        <segue reference="7Ze-Bc-Xch"/>
     </inferredMetricsTieBreakers>
 </document>

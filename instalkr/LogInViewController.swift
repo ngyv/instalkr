@@ -41,14 +41,37 @@ class LogInViewController : UIViewController, WKNavigationDelegate
         https://instagram.com/oauth/authorize/?client_id=CLIENT-ID&redirect_uri=REDIRECT-URI&response_type=token
         
     */
+
+//-->  Check for user preference if they're authenticated and have authorized your application
+        let userPref = NSUserDefaults.standardUserDefaults()
+        
+        if let access_token: AnyObject = userPref.objectForKey("access_token")
+        {
+            self.access_token = access_token as? String
+            
+            self.goToSearch()
+        }
+        else
+        {
+            self.loadInstagramLogIn()
+        }
         
         
+    }
+    
+    func loadInstagramLogIn()
+    {
         if let authenticateURL = NSURL(string: "https://instagram.com/oauth/authorize/?client_id=89dc0b5019ed496da3ce54763e3b5254&redirect_uri=http://sassycodes.tumblr.com&response_type=token")
         {
             let req = NSURLRequest(URL: authenticateURL)
             
             logInWebView?.loadRequest(req)
         }
+    }
+    
+    func goToSearch()
+    {
+        self.performSegueWithIdentifier("logInToSearch", sender: self)
     }
     
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!)
@@ -68,13 +91,49 @@ class LogInViewController : UIViewController, WKNavigationDelegate
         {
             var redirect = webView.URL!.absoluteString!
             
-            self.access_token = redirect.substringFromIndex(advance(redirect.startIndex, count(self.given_redirect)))
+            NSLog(redirect)
+            var dump : String = "/#access_token="
             
-            //self.performSegueWithIdentifier("logInToSearch", sender: self)
+            self.access_token = redirect.substringFromIndex(advance(redirect.startIndex, count(self.given_redirect) + count(dump)))
             
+            
+            
+//-->   Save user preferences
+            
+            let userPref = NSUserDefaults.standardUserDefaults()
+            userPref.setObject(self.access_token, forKey: "access_token")
+            
+            self.goToSearch()
+            
+            
+           
         }
     }
-    /*
+    
+    func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError)
+    {
+        
+        var mcShrugs : UIImage = UIImage.init(named: "Shrugs")!
+        
+        view.addSubview(UIImageView.init(image: mcShrugs))
+
+        var alertUser : UIAlertController = UIAlertController.init(title: "Oops!", message: "Something appears to have gone wrong. Please try again." , preferredStyle: UIAlertControllerStyle.Alert)
+        
+        var actionUser : UIAlertAction = UIAlertAction.init(title:"OK", style: UIAlertActionStyle.Default,
+            handler: { (actionUser: UIAlertAction!) -> Void in
+            
+                view.subviews.map({ $0.removeFromSuperview() })
+                
+        })
+        
+        alertUser.addAction(actionUser)
+        self.presentViewController(alertUser, animated: true, completion: nil)
+        
+        
+    }
+    
+    
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
         
@@ -82,6 +141,6 @@ class LogInViewController : UIViewController, WKNavigationDelegate
         {
             (segue.destinationViewController as! SearchViewController).access_token = self.access_token!
         }
-    }*/
+    }
 }
 
