@@ -91,6 +91,8 @@ class LogInViewController : UIViewController, WKNavigationDelegate
             let userPref = NSUserDefaults.standardUserDefaults()
             userPref.setObject(self.access_token, forKey: "access_token")
             
+
+            
             self.goToSearch()
             
             

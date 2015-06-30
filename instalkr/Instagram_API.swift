@@ -29,6 +29,12 @@ class Instagram_API
     {
         return "https://api.instagram.com/v1/users/\(user_id)/?access_token=\(access_token)"
     }
+    
+    class func getOWNBasicUserInfo ( access_token : String ) -> String
+    {
+        return getBasicUserInfo(access_token, user_id: "self")
+    }
+    
 
     class func getUserFeed ( access_token : String ) -> String
     {
@@ -38,20 +44,26 @@ class Instagram_API
     class func getRecentMedia ( access_token : String, user_id: String ) -> String
     {
         return "https://api.instagram.com/v1/users/\(user_id)/media/recent/?access_token=\(access_token)"
-        
     }
+    
+    class func getOWNRecentMedia ( access_token : String, user_id: String ) -> String
+    {
+        return getRecentMedia(access_token, user_id: "self")
+    }
+    
     
     class func getMediaLiked ( access_token : String ) -> String
     {
         return "https://api.instagram.com/v1/users/self/media/liked?access_token=\(access_token)"
     }
     
+    
     class func getUserSearch ( access_token : String, query_user_name: String ) -> String
     {
         return "https://api.instagram.com/v1/users/search?q=\(query_user_name)&access_token=\(access_token)"
     }
     
-    
+
     
     
     
@@ -86,6 +98,24 @@ class Instagram_API
     {
         return "https://api.instagram.com/v1/users/\(user_id)/followed-by?access_token=\(access_token)"
     }
+    
+    
+    
+    
+    
+    //______________________________________________________________________________________________________________
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 
 

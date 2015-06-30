@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-
 struct MMedia
 {
     let link : String
@@ -22,7 +20,7 @@ struct MMedia
     var likesCount : Int
     var likesData : [[String:String]] = [ ["username" : "", "full_name" : "", "id" : "", "profile_picture" : "" ] ]
     var tags : [String]
-    var users_in_photo : [ MUser ]
+    var users_in_photo : [ Model_User ]
     
     struct image {
         var url : String
