@@ -11,7 +11,9 @@ import UIKit
 
 class SearchViewController : UIViewController
 {
-    var access_token : String = ""
+
+    @IBOutlet weak var relationshipScrollView: UIScrollView!
+
     
     override func viewDidLoad() {
         

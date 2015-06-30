@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 import WebKit
 
-
 class LogInViewController : UIViewController, WKNavigationDelegate
 {
     
@@ -61,12 +60,13 @@ class LogInViewController : UIViewController, WKNavigationDelegate
     
     func loadInstagramLogIn()
     {
-        if let authenticateURL = NSURL(string: "https://instagram.com/oauth/authorize/?client_id=89dc0b5019ed496da3ce54763e3b5254&redirect_uri=http://sassycodes.tumblr.com&response_type=token")
+        if let authenticateURL = NSURL(string: Instagram_API.getAuthenticateURL())
         {
             let req = NSURLRequest(URL: authenticateURL)
             
             logInWebView?.loadRequest(req)
         }
+        
     }
     
     func goToSearch()
@@ -132,15 +132,5 @@ class LogInViewController : UIViewController, WKNavigationDelegate
         
     }
     
-    
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
-    {
-        
-        if(segue.identifier == "logInToSearch")
-        {
-            (segue.destinationViewController as! SearchViewController).access_token = self.access_token!
-        }
-    }
 }
 

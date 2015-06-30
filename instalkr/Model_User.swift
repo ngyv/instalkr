@@ -10,12 +10,14 @@ import Foundation
 
 struct MUser
 {
-    
+ //--
     let id : String
     let username : String
     
     var full_name : String = ""
     var profile_picture : String = ""
+ //--
+    
     var bio : String = ""
     var website : String = ""
     

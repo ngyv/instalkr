@@ -78,8 +78,6 @@ class WelcomeViewController : UIViewController {
             
         })
         
-       
-        
     }
     
     override func viewDidLoad()

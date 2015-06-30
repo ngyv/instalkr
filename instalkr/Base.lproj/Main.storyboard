@@ -128,8 +128,22 @@
                     <view key="view" contentMode="scaleToFill" id="uXQ-zN-1W4">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qTm-v6-4Sr" userLabel="Relationship Scroll View">
+                                <rect key="frame" x="16" y="0.0" width="568" height="600"/>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="qTm-v6-4Sr" secondAttribute="trailing" id="KeS-1H-b1s"/>
+                            <constraint firstItem="qTm-v6-4Sr" firstAttribute="leading" secondItem="uXQ-zN-1W4" secondAttribute="leadingMargin" id="XdB-e4-iYN"/>
+                            <constraint firstItem="08C-6E-dno" firstAttribute="top" secondItem="qTm-v6-4Sr" secondAttribute="bottom" id="v0v-OP-9FY"/>
+                            <constraint firstItem="qTm-v6-4Sr" firstAttribute="top" secondItem="uXQ-zN-1W4" secondAttribute="topMargin" id="zof-te-JV2"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="relationshipScrollView" destination="qTm-v6-4Sr" id="xch-3k-MwY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4BE-39-kMi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
