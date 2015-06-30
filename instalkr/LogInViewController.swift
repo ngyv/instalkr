@@ -40,21 +40,9 @@ class LogInViewController : UIViewController, WKNavigationDelegate
         https://instagram.com/oauth/authorize/?client_id=CLIENT-ID&redirect_uri=REDIRECT-URI&response_type=token
         
     */
-
-//-->  Check for user preference if they're authenticated and have authorized your application
-        let userPref = NSUserDefaults.standardUserDefaults()
         
-        if let access_token: AnyObject = userPref.objectForKey("access_token")
-        {
-            self.access_token = access_token as? String
-            
-            self.goToSearch()
-        }
-        else
-        {
-            self.loadInstagramLogIn()
-        }
-        
+        //the check has been done on the Welcome page
+        self.loadInstagramLogIn()
         
     }
     
