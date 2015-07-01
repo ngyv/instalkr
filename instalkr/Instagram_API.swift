@@ -41,14 +41,14 @@ class Instagram_API
         return "https://api.instagram.com/v1/users/self/feed?access_token=\(access_token)"
     }
     
-    class func getRecentMedia ( access_token : String, user_id: String ) -> String
+    class func getRecentMedia ( access_token : String, user_id: String, mediaCount : String ) -> String
     {
-        return "https://api.instagram.com/v1/users/\(user_id)/media/recent/?access_token=\(access_token)"
+        return "https://api.instagram.com/v1/users/\(user_id)/media/recent/?access_token=\(access_token)&count=\(mediaCount)"
     }
     
-    class func getOWNRecentMedia ( access_token : String, user_id: String ) -> String
+    class func getOWNRecentMedia ( access_token : String, user_id: String , mediaCount : String  ) -> String
     {
-        return getRecentMedia(access_token, user_id: "self")
+        return getRecentMedia(access_token, user_id: "self", mediaCount : mediaCount)
     }
     
     

@@ -14,48 +14,38 @@ class SearchViewController : UIViewController
 
     @IBOutlet weak var relationshipScrollView: UIScrollView!
 
-    var access_token : String?
+    @IBOutlet weak var mainUserNode: VMUser!
+    
+    var theGraph : Graph
+    
+    
+    required init(coder aDecoder: NSCoder)
+    {
+        
+    //** As of now, assume that the user has already logged in
+        
+        var userPref = NSUserDefaults.standardUserDefaults()
+        
+        var mainUser : UserNode = UserNode(me: Model_User.createMUser(userPref.objectForKey("user")!))
+        self.theGraph = Graph(theMainUser: mainUser)
+        
+        super.init(coder: aDecoder)
+    }
+    
     
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-        
-
-        
-        
     }
     
     override func viewDidLoad()
     {
         
         super.viewDidLoad()
-    
-        //------> get user logged in basic info & store it
+        
+        self.mainUserNode.showView( self.theGraph.userInFocus.myself )
         
         
-        var userPref : NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        
-        self.access_token =  (userPref.objectForKey("access_token") as? String)!
-        
-        var theSession : NSURLSession = NSURLSession.sharedSession()
-        
-        var theURL     : NSURL        = NSURL(string: Instagram_API.getOWNBasicUserInfo(self.access_token!))!
-        
-        var theRequest : NSURLRequest = NSURLRequest(URL: theURL)
-        
-        theSession.dataTaskWithRequest(theRequest, completionHandler: {
-            
-            (data, response, error) -> Void in
-            
-            let jsonData: AnyObject = NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions.MutableContainers , error: nil)!
-            
-            //var userLoggedIn : Model_User = Model_User.createMUser(jsonData.objectForKey("data")!)
-            
-            //NSLog("\(userLoggedIn.id)")
-            
-            userPref.setObject(jsonData.objectForKey("data")!, forKey: "user")
-            
-        }).resume()
     }
 }
 

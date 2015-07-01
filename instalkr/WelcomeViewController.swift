@@ -43,6 +43,7 @@ class WelcomeViewController : UIViewController {
             self.bounceImageAndGoSearch()
             
         }
+        
 
     }
     
@@ -63,12 +64,12 @@ class WelcomeViewController : UIViewController {
             theView.frame = self.incognitoWelcomeImage.frame
         }
         
-        UIView.transitionFromView(self.incognitoWelcomeImage, toView: viewOne, duration: 2.5, options: UIViewAnimationOptions.TransitionCrossDissolve, completion: { (finished : Bool) -> Void in
+        UIView.transitionFromView(self.incognitoWelcomeImage, toView: viewOne, duration: 2, options: UIViewAnimationOptions.TransitionCrossDissolve, completion: { (finished : Bool) -> Void in
             
-            UIView.transitionFromView(viewOne, toView: viewTwo, duration: 1.2, options: UIViewAnimationOptions.TransitionCrossDissolve, completion: { (finished : Bool) -> Void in
+            UIView.transitionFromView(viewOne, toView: viewTwo, duration: 0.9, options: UIViewAnimationOptions.TransitionCrossDissolve, completion: { (finished : Bool) -> Void in
                 
                 
-                UIView.transitionFromView(viewTwo, toView: viewThree, duration: 1.1, options: UIViewAnimationOptions.TransitionCrossDissolve, completion: { (finished : Bool) -> Void in
+                UIView.transitionFromView(viewTwo, toView: viewThree, duration: 0.7, options: UIViewAnimationOptions.TransitionCrossDissolve, completion: { (finished : Bool) -> Void in
                     
                         self.performSegueWithIdentifier("welcomeToSearch", sender: self)
                     

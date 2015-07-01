@@ -91,7 +91,29 @@ class LogInViewController : UIViewController, WKNavigationDelegate
             let userPref = NSUserDefaults.standardUserDefaults()
             userPref.setObject(self.access_token, forKey: "access_token")
             
-
+            //------> get user logged in basic info & store it
+            
+            self.access_token =  (userPref.objectForKey("access_token") as? String)!
+            
+            var theSession : NSURLSession = NSURLSession.sharedSession()
+            
+            var theURL     : NSURL        = NSURL(string: Instagram_API.getOWNBasicUserInfo(self.access_token!))!
+            
+            var theRequest : NSURLRequest = NSURLRequest(URL: theURL)
+            
+            theSession.dataTaskWithRequest(theRequest, completionHandler: {
+                
+                (data, response, error) -> Void in
+                
+                let jsonData: AnyObject = NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions.MutableContainers , error: nil)!
+                
+                //var userLoggedIn : Model_User = Model_User.createMUser(jsonData.objectForKey("data")!)
+                
+                //NSLog("\(userLoggedIn.id)")
+                
+                userPref.setObject(jsonData.objectForKey("data")!, forKey: "user")
+                
+            }).resume()
             
             self.goToSearch()
             

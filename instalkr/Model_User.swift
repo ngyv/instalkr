@@ -41,6 +41,23 @@ class Model_User
     }
     
     
+    convenience init(id :  String, username : String,profile_picture :  String, position: [String : Int])
+    {
+        self.init(id: id, username: username, full_name: "", profile_picture: profile_picture, bio: "", website: "", counts: [ "media" : 0 , "follows" : 0 , "followed_by" : 0 ], position: position)
+    }
+    
+    convenience init(id: String, username: String, full_name: String, profile_picture: String)
+    {
+        self.init(id :  id, username : username, full_name : full_name, profile_picture :  profile_picture, bio :  "", website :  "",
+            counts : [ "media" : 0 , "follows" : 0 , "followed_by" : 0 ], position: [ "x" : 0 , "y" : 0 ])
+    }
+    
+    convenience init(id : String, username: String, profile_picture : String)
+    {
+        self.init(id :  id, username : username, full_name : "", profile_picture :  profile_picture, bio :  "", website :  "",
+        counts : [ "media" : 0 , "follows" : 0 , "followed_by" : 0 ], position: [ "x" : 0 , "y" : 0 ])
+    }
+    
     class func createMUser (fromJsonData : AnyObject) -> Model_User
     {
         var counts : [String:Int] = fromJsonData.objectForKey("counts") as! [String:Int]
@@ -61,7 +78,6 @@ class Model_User
         )
         
         return userLogged
-        
     }
     
 }
