@@ -40,7 +40,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="C4D-gl-qTs" kind="presentation" identifier="welcomeToSearch" id="7Ze-Bc-Xch"/>
+                                    <segue destination="msK-AK-an5" kind="presentation" identifier="welcomeToSearch" id="bAN-KW-fTw"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome, stalkr !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0FT-3v-ymH">
@@ -112,15 +112,34 @@
                         <outlet property="incognitoWelcomeImage" destination="DCI-Aa-jQC" id="f5w-1d-pJI"/>
                         <outlet property="logInButton" destination="hXC-dR-0gO" id="2mQ-er-XcC"/>
                         <outlet property="welcomeLabel" destination="0FT-3v-ymH" id="juW-qc-qAR"/>
+                        <segue destination="C4D-gl-qTs" kind="presentation" identifier="welcomeToGraph" modalTransitionStyle="crossDissolve" id="MJO-ZF-d29"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--Search View Controller-->
+        <!--View Controller-->
+        <scene sceneID="D6a-m1-C9f">
+            <objects>
+                <viewController id="msK-AK-an5" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KKt-7k-axl"/>
+                        <viewControllerLayoutGuide type="bottom" id="5Jb-6k-zh5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Iu2-ej-3ph">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1OI-sB-iw4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="185" y="1153"/>
+        </scene>
+        <!--Graph View Controller-->
         <scene sceneID="9Nq-82-DvF">
             <objects>
-                <viewController id="C4D-gl-qTs" userLabel="Search View Controller" customClass="SearchViewController" customModule="instalkr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="C4D-gl-qTs" userLabel="Graph View Controller" customClass="GraphViewController" customModule="instalkr" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lBf-ul-9Na"/>
                         <viewControllerLayoutGuide type="bottom" id="08C-6E-dno"/>
@@ -170,7 +189,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4BE-39-kMi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="729" y="1141"/>
+            <point key="canvasLocation" x="1114" y="1153"/>
         </scene>
         <!--LOG IN View Controller-->
         <scene sceneID="suG-5W-Nqy">
@@ -186,7 +205,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="C4D-gl-qTs" kind="presentation" identifier="logInToSearch" id="4IQ-NG-yO8"/>
+                        <segue destination="C4D-gl-qTs" kind="presentation" identifier="logInToSearch" modalTransitionStyle="crossDissolve" id="4IQ-NG-yO8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LxQ-xV-Ska" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -198,6 +217,6 @@
         <image name="incognito" width="598" height="300"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7Ze-Bc-Xch"/>
+        <segue reference="4IQ-NG-yO8"/>
     </inferredMetricsTieBreakers>
 </document>

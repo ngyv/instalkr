@@ -71,7 +71,7 @@ class WelcomeViewController : UIViewController {
                 
                 UIView.transitionFromView(viewTwo, toView: viewThree, duration: 0.7, options: UIViewAnimationOptions.TransitionCrossDissolve, completion: { (finished : Bool) -> Void in
                     
-                        self.performSegueWithIdentifier("welcomeToSearch", sender: self)
+                        self.performSegueWithIdentifier("welcomeToGraph", sender: self)
                     
                 })
                 

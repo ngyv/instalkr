@@ -10,6 +10,7 @@
 		DC582A221B43872300D06DB5 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC582A211B43872300D06DB5 /* Graph.swift */; };
 		DC582A241B438FAF00D06DB5 /* Algorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC582A231B438FAF00D06DB5 /* Algorithm.swift */; };
 		DC5E77361B423F9A00E69BF5 /* Instagram_API.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5E77351B423F9A00E69BF5 /* Instagram_API.swift */; };
+		DC5FC2071B468F2D00EFDE5C /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5FC2061B468F2D00EFDE5C /* GraphViewController.swift */; };
 		DC783E1D1B3EDB0900BB1FA7 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC783E1C1B3EDB0900BB1FA7 /* LogInViewController.swift */; };
 		DC783E1F1B3EDB1700BB1FA7 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC783E1E1B3EDB1700BB1FA7 /* SearchViewController.swift */; };
 		DC783E221B3EEF4700BB1FA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC783E201B3EEF4700BB1FA7 /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 		DC582A211B43872300D06DB5 /* Graph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		DC582A231B438FAF00D06DB5 /* Algorithm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Algorithm.swift; sourceTree = "<group>"; };
 		DC5E77351B423F9A00E69BF5 /* Instagram_API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instagram_API.swift; sourceTree = "<group>"; };
+		DC5FC2061B468F2D00EFDE5C /* GraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 		DC783E1C1B3EDB0900BB1FA7 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		DC783E1E1B3EDB1700BB1FA7 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		DC783E211B3EEF4700BB1FA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				DCF32C191B3D482100B2AF0E /* WelcomeViewController.swift */,
 				DC783E1C1B3EDB0900BB1FA7 /* LogInViewController.swift */,
 				DC783E1E1B3EDB1700BB1FA7 /* SearchViewController.swift */,
+				DC5FC2061B468F2D00EFDE5C /* GraphViewController.swift */,
 			);
 			name = "View Controller";
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				DCF32C181B3D482100B2AF0E /* AppDelegate.swift in Sources */,
 				DC582A241B438FAF00D06DB5 /* Algorithm.swift in Sources */,
 				DCD822F71B428774001DC0A5 /* Instagram_Services.swift in Sources */,
+				DC5FC2071B468F2D00EFDE5C /* GraphViewController.swift in Sources */,
 				DC5E77361B423F9A00E69BF5 /* Instagram_API.swift in Sources */,
 				DC7B53B41B4523D000074FF8 /* ViewModel_User.swift in Sources */,
 			);
