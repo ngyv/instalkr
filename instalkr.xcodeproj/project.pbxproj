@@ -13,6 +13,7 @@
 		DC783E1D1B3EDB0900BB1FA7 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC783E1C1B3EDB0900BB1FA7 /* LogInViewController.swift */; };
 		DC783E1F1B3EDB1700BB1FA7 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC783E1E1B3EDB1700BB1FA7 /* SearchViewController.swift */; };
 		DC783E221B3EEF4700BB1FA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC783E201B3EEF4700BB1FA7 /* Main.storyboard */; };
+		DC7B53B41B4523D000074FF8 /* ViewModel_User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7B53B31B4523D000074FF8 /* ViewModel_User.swift */; };
 		DCD822F71B428774001DC0A5 /* Instagram_Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD822F61B428774001DC0A5 /* Instagram_Services.swift */; };
 		DCF32C181B3D482100B2AF0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF32C171B3D482100B2AF0E /* AppDelegate.swift */; };
 		DCF32C1A1B3D482100B2AF0E /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF32C191B3D482100B2AF0E /* WelcomeViewController.swift */; };
@@ -21,7 +22,6 @@
 		DCF32C2E1B3D482100B2AF0E /* instalkrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF32C2D1B3D482100B2AF0E /* instalkrTests.swift */; };
 		DCF32C3A1B3D4BC900B2AF0E /* Model_User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF32C391B3D4BC900B2AF0E /* Model_User.swift */; };
 		DCF32C3C1B3D4BD600B2AF0E /* Model_Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF32C3B1B3D4BD600B2AF0E /* Model_Media.swift */; };
-		DCF32C3E1B3D57BE00B2AF0E /* ViewModel_User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF32C3D1B3D57BE00B2AF0E /* ViewModel_User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +41,7 @@
 		DC783E1C1B3EDB0900BB1FA7 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		DC783E1E1B3EDB1700BB1FA7 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		DC783E211B3EEF4700BB1FA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DC7B53B31B4523D000074FF8 /* ViewModel_User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel_User.swift; sourceTree = "<group>"; };
 		DCD822F61B428774001DC0A5 /* Instagram_Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instagram_Services.swift; sourceTree = "<group>"; };
 		DCF32C121B3D482100B2AF0E /* instalkr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = instalkr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCF32C161B3D482100B2AF0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,7 +54,6 @@
 		DCF32C2D1B3D482100B2AF0E /* instalkrTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = instalkrTests.swift; sourceTree = "<group>"; };
 		DCF32C391B3D4BC900B2AF0E /* Model_User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model_User.swift; sourceTree = "<group>"; };
 		DCF32C3B1B3D4BD600B2AF0E /* Model_Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model_Media.swift; sourceTree = "<group>"; };
-		DCF32C3D1B3D57BE00B2AF0E /* ViewModel_User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel_User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,7 +174,7 @@
 		DCF32C381B3D4A5300B2AF0E /* View Model */ = {
 			isa = PBXGroup;
 			children = (
-				DCF32C3D1B3D57BE00B2AF0E /* ViewModel_User.swift */,
+				DC7B53B31B4523D000074FF8 /* ViewModel_User.swift */,
 			);
 			name = "View Model";
 			sourceTree = "<group>";
@@ -281,7 +281,6 @@
 			files = (
 				DCF32C3C1B3D4BD600B2AF0E /* Model_Media.swift in Sources */,
 				DC783E1F1B3EDB1700BB1FA7 /* SearchViewController.swift in Sources */,
-				DCF32C3E1B3D57BE00B2AF0E /* ViewModel_User.swift in Sources */,
 				DC783E1D1B3EDB0900BB1FA7 /* LogInViewController.swift in Sources */,
 				DC582A221B43872300D06DB5 /* Graph.swift in Sources */,
 				DCF32C1A1B3D482100B2AF0E /* WelcomeViewController.swift in Sources */,
@@ -290,6 +289,7 @@
 				DC582A241B438FAF00D06DB5 /* Algorithm.swift in Sources */,
 				DCD822F71B428774001DC0A5 /* Instagram_Services.swift in Sources */,
 				DC5E77361B423F9A00E69BF5 /* Instagram_API.swift in Sources */,
+				DC7B53B41B4523D000074FF8 /* ViewModel_User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
