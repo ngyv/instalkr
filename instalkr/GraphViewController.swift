@@ -82,7 +82,6 @@ class GraphViewController : UIViewController, UISearchBarDelegate
         mainUserNode!.addSubview(mainUserNode!.imageView!)
         mainUserNode!.addSubview(mainUserNode!.usernameLabel!)
         
-        //self.contentView.addSubview(mainUserNode!)
         self.relationshipScrollView.addSubview(mainUserNode!)
         
         
@@ -98,8 +97,7 @@ class GraphViewController : UIViewController, UISearchBarDelegate
         
         
         // Add constraints  -->   item1.attribute1 = multiplier × item2.attribute2 + constant
-        
-        
+
         
         //  Set width & height of View
         
@@ -183,14 +181,29 @@ class GraphViewController : UIViewController, UISearchBarDelegate
         self.performSegueWithIdentifier( goToSearch , sender: self)
     }
 
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool
+    {
+        searchBar.alpha = 0.8
+
+        return true
+    }
     
+    func searchBarShouldEndEditing(searchBar: UISearchBar) -> Bool {
+        
+        searchBar.alpha = 0.15
+        
+        return true
+    }
+
     
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
     {
         if (segue.identifier == goToSearch )
         {
-    
+            var controller : UIViewController = segue.destinationViewController as! SearchViewController
+            
+            
         }
     }
     

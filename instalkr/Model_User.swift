@@ -58,11 +58,17 @@ class Model_User
         counts : [ "media" : 0 , "follows" : 0 , "followed_by" : 0 ], position: [ "x" : 0 , "y" : 0 ])
     }
     
+    convenience init(id : String, username: String, profile_picture : String, first_name : String, last_name : String)
+    {
+        self.init(id :  id, username : username, full_name : "\(first_name) \(last_name)", profile_picture :  profile_picture, bio :  "", website :  "", counts : [ "media" : 0 , "follows" : 0 , "followed_by" : 0 ], position: [ "x" : 0 , "y" : 0 ])
+    }
+    
+    
+    
     class func createMUser (fromJsonData : AnyObject) -> Model_User
     {
         var counts : [String:Int] = fromJsonData.objectForKey("counts") as! [String:Int]
         
-
         var userLogged = Model_User(
             
             id : fromJsonData.objectForKey("id") as! String,
@@ -79,6 +85,42 @@ class Model_User
         
         return userLogged
     }
+    
+    class func createListOfUsers (fromJsonData : AnyObject) -> [ Model_User ]
+    {
+        var listOfUsers : [ Model_User ] = [ Model_User ]()
+        if( (fromJsonData as! [ AnyObject ]).count > 0)
+        {
+            if( fromJsonData.objectAtIndex(0).allKeys.count == 4 )
+            {
+                for eachUser in (fromJsonData as! [AnyObject])
+                {
+                    listOfUsers.append( Model_User(
+                        id: eachUser.objectForKey("id") as! String,
+                        username: eachUser.objectForKey("username") as! String,
+                        full_name: eachUser.objectForKey("full_name") as! String,
+                        profile_picture: eachUser.objectForKey("profile_picture") as! String
+                        ))
+                }
+            }
+            else if( fromJsonData.objectAtIndex(0).allKeys.count == 4 )
+            {
+                for eachUser in (fromJsonData as! [AnyObject])
+                {
+                    listOfUsers.append( Model_User(
+                        id: eachUser.objectForKey("id") as! String,
+                        username: eachUser.objectForKey("username") as! String,
+                        profile_picture: eachUser.objectForKey("profile_picture") as! String,
+                        first_name: eachUser.objectForKey("first_name") as! String,
+                        last_name: eachUser.objectForKey("last_name") as! String
+                        ))
+                }
+            }
+        }
+        
+        return listOfUsers
+    }
+    
     
 }
 

@@ -129,13 +129,45 @@
                     <view key="view" contentMode="scaleToFill" id="Iu2-ej-3ph">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" placeholder="Search for user" translatesAutoresizingMaskIntoConstraints="NO" id="vW4-gw-VE1">
+                                <rect key="frame" x="16" y="20" width="568" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="LXD-ZX-8cW"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="barTintColor">
+                                        <color key="value" red="0.81366458293846411" green="1" blue="0.87663523564682633" alpha="0.0" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="delegate" destination="msK-AK-an5" id="2Te-as-bdO"/>
+                                </connections>
+                            </searchBar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="vW4-gw-VE1" secondAttribute="trailing" id="0Nk-3D-NCy"/>
+                            <constraint firstItem="vW4-gw-VE1" firstAttribute="top" secondItem="Iu2-ej-3ph" secondAttribute="topMargin" constant="20" id="Z0j-ED-XCa"/>
+                            <constraint firstItem="vW4-gw-VE1" firstAttribute="leading" secondItem="Iu2-ej-3ph" secondAttribute="leadingMargin" id="x7k-23-56h"/>
+                        </constraints>
                     </view>
                     <connections>
+                        <outlet property="searchDisplayController" destination="IK5-tv-lBk" id="EVi-7g-JLF"/>
                         <segue destination="C4D-gl-qTs" kind="presentation" identifier="searchToGraph" id="N8W-hh-BBm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1OI-sB-iw4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="IK5-tv-lBk">
+                    <connections>
+                        <outlet property="delegate" destination="msK-AK-an5" id="g2x-EY-9wv"/>
+                        <outlet property="searchBar" destination="vW4-gw-VE1" id="KfE-G1-rD0"/>
+                        <outlet property="searchContentsController" destination="msK-AK-an5" id="38v-7a-a3W"/>
+                        <outlet property="searchResultsDataSource" destination="msK-AK-an5" id="3ow-p4-FVx"/>
+                        <outlet property="searchResultsDelegate" destination="msK-AK-an5" id="f6f-vm-1Ry"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="242" y="1163"/>
         </scene>
@@ -151,18 +183,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8HC-Ug-Oub" userLabel="Search Bar View">
-                                <rect key="frame" x="16" y="20" width="568" height="45"/>
+                            <view clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8HC-Ug-Oub" userLabel="Search Bar View">
+                                <rect key="frame" x="0.0" y="20" width="568" height="45"/>
                                 <subviews>
                                     <searchBar multipleTouchEnabled="YES" contentMode="redraw" placeholder="Search for user" translatesAutoresizingMaskIntoConstraints="NO" id="gn9-w4-ytz">
                                         <rect key="frame" x="0.0" y="1" width="568" height="44"/>
-                                        <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="barTintColor">
+                                                <color key="value" red="0.79121305448868418" green="1" blue="0.90234367783864666" alpha="0.0" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="alpha">
+                                                <real key="value" value="0.14999999999999999"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="delegate" destination="C4D-gl-qTs" id="X4y-sp-8j7"/>
                                         </connections>
                                     </searchBar>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
@@ -179,14 +218,14 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qTm-v6-4Sr" userLabel="Relationship Scroll View">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qTm-v6-4Sr" userLabel="Relationship Scroll View">
                                 <rect key="frame" x="16" y="0.0" width="568" height="600"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cYD-VW-TAc" userLabel="conntentView">
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cYD-VW-TAc" userLabel="contentView">
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uwN-LX-KkD" customClass="VMUser" customModule="instalkr" customModuleProvider="target">
-                                        <rect key="frame" x="184" y="200" width="200" height="200"/>
+                                        <rect key="frame" x="184" y="178" width="200" height="200"/>
                                         <color key="backgroundColor" red="0.93725490196078431" green="1" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="5Oh-6o-iwB"/>
@@ -233,7 +272,7 @@
                             <constraint firstItem="8HC-Ug-Oub" firstAttribute="top" secondItem="qTm-v6-4Sr" secondAttribute="bottom" constant="-450" id="pxz-S0-7XS"/>
                             <constraint firstItem="08C-6E-dno" firstAttribute="top" secondItem="qTm-v6-4Sr" secondAttribute="bottom" id="v0v-OP-9FY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8HC-Ug-Oub" secondAttribute="trailing" id="yEp-1F-Dxn"/>
-                            <constraint firstItem="qTm-v6-4Sr" firstAttribute="top" secondItem="uXQ-zN-1W4" secondAttribute="topMargin" id="zof-te-JV2"/>
+                            <constraint firstItem="qTm-v6-4Sr" firstAttribute="top" secondItem="uXQ-zN-1W4" secondAttribute="topMargin" constant="45" id="zof-te-JV2"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">

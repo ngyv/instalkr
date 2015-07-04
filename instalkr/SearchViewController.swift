@@ -9,12 +9,12 @@
 import Foundation
 import UIKit
 
-class SearchViewController : UIViewController
+class SearchViewController : UIViewController, UISearchBarDelegate, UISearchControllerDelegate
 {
 
     let goToGraph : String = "searchToGraph"
     
-
+    @IBOutlet var searchBar : UISearchBar!
     
     required init(coder aDecoder: NSCoder)
     {
@@ -37,6 +37,19 @@ class SearchViewController : UIViewController
     }
     
 
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool
+    {
+        searchBar.alpha = 0.8
+        
+        return true
+    }
+    
+    func searchBarShouldEndEditing(searchBar: UISearchBar) -> Bool {
+        
+        searchBar.alpha = 0.15
+        
+        return true
+    }
 
 
 

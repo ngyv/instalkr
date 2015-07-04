@@ -45,6 +45,7 @@ class Instagram_Services
     func populateUsersRecentMedia ( user_id : String, numOfMedia : String ) -> [ Model_Media ]
     {
         var recentMedia : [ Model_Media ] = [ Model_Media ]()
+        
         if let url : NSURL = NSURL( string: Instagram_API.getRecentMedia(access_token, user_id: user_id, mediaCount : numOfMedia) )
         {
             theSession.dataTaskWithURL(url, completionHandler: {
@@ -64,10 +65,72 @@ class Instagram_Services
     }
     
     
+    func populateUsersFollows ( user_id : String ) -> [ Model_User ]
+    {
+        var userFollows : [ Model_User ] = [ Model_User ]()
+        
+        if let url : NSURL = NSURL ( string: Instagram_API.getRelationshipUserFollows(access_token, user_id: user_id) )
+        {
+            theSession.dataTaskWithURL(url, completionHandler: {
+                
+                (data, response, error) -> Void in
+            
+                let jsonData : AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+                
+                userFollows = Model_User.createListOfUsers(jsonData.objectForKey("data")!)
+                
+                
+            })
+        }
+        
+        
+        return userFollows
+    }
     
     
+    func populateUsersFollowedBy ( user_id : String ) -> [ Model_User ]
+    {
+        var usersFollowedBy : [ Model_User ] = [ Model_User ]()
+        
+        if let url : NSURL = NSURL ( string: Instagram_API.getRelationshipUserFollowedBy(access_token, user_id: user_id) )
+        {
+            theSession.dataTaskWithURL(url, completionHandler: {
+                
+                (data, response, error) -> Void in
+                
+                let jsonData : AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+                
+                
+                usersFollowedBy = Model_User.createListOfUsers(jsonData.objectForKey("data")!)
+                
+                
+            })
+            
+        }
+        
+        
+        return usersFollowedBy
+    }
     
-    
+    func populateUserSearch ( queryUsername : String ) -> [ Model_User ]
+    {
+        var userResults : [ Model_User ] = [ Model_User ]()
+        
+        if let url : NSURL = NSURL(string: Instagram_API.getUserSearch(access_token, query_user_name: queryUsername) )
+        {
+            theSession.dataTaskWithURL(url, completionHandler: {
+                
+                (data, response, error) -> Void in
+                
+                let jsonData : AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+                
+                userResults = Model_User.createListOfUsers(jsonData.objectForKey("data")!)
+            })
+            
+        }
+        
+        return userResults
+    }
     
     
     
