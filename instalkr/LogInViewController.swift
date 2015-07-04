@@ -10,12 +10,16 @@ import Foundation
 import UIKit
 import WebKit
 
+let userPrefKeys_user = "user"
+
 class LogInViewController : UIViewController, WKNavigationDelegate
 {
     
     private var logInWebView : WKWebView?
     
     let given_redirect : String = "http://sassycodes.tumblr.com"
+    
+    let goToSearch : String = "logInToSearch"
     
     var access_token : String?
     
@@ -57,10 +61,6 @@ class LogInViewController : UIViewController, WKNavigationDelegate
         
     }
     
-    func goToSearch()
-    {
-        self.performSegueWithIdentifier("logInToSearch", sender: self)
-    }
     
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!)
     {
@@ -89,11 +89,11 @@ class LogInViewController : UIViewController, WKNavigationDelegate
 //-->   Save user preferences
             
             let userPref = NSUserDefaults.standardUserDefaults()
-            userPref.setObject(self.access_token, forKey: "access_token")
+            userPref.setObject(self.access_token, forKey: userPrefKeys_accessToken)
             
             //------> get user logged in basic info & store it
             
-            self.access_token =  (userPref.objectForKey("access_token") as? String)!
+            self.access_token =  (userPref.objectForKey(userPrefKeys_accessToken) as? String)!
             
             var theSession : NSURLSession = NSURLSession.sharedSession()
             
@@ -111,11 +111,11 @@ class LogInViewController : UIViewController, WKNavigationDelegate
                 
                 //NSLog("\(userLoggedIn.id)")
                 
-                userPref.setObject(jsonData.objectForKey("data")!, forKey: "user")
+                userPref.setObject(jsonData.objectForKey("data")!, forKey: userPrefKeys_user)
                 
             }).resume()
             
-            self.goToSearch()
+            self.performSegueWithIdentifier(goToSearch, sender: self)
             
             
            

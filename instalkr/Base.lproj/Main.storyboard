@@ -118,10 +118,10 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--View Controller-->
+        <!--Search View Controller-->
         <scene sceneID="D6a-m1-C9f">
             <objects>
-                <viewController id="msK-AK-an5" sceneMemberID="viewController">
+                <viewController id="msK-AK-an5" customClass="SearchViewController" customModule="instalkr" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KKt-7k-axl"/>
                         <viewControllerLayoutGuide type="bottom" id="5Jb-6k-zh5"/>
@@ -131,10 +131,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="C4D-gl-qTs" kind="presentation" identifier="searchToGraph" id="N8W-hh-BBm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1OI-sB-iw4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="185" y="1153"/>
+            <point key="canvasLocation" x="242" y="1163"/>
         </scene>
         <!--Graph View Controller-->
         <scene sceneID="9Nq-82-DvF">
@@ -148,9 +151,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8HC-Ug-Oub" userLabel="Search Bar View">
+                                <rect key="frame" x="16" y="20" width="568" height="45"/>
+                                <subviews>
+                                    <searchBar multipleTouchEnabled="YES" contentMode="redraw" placeholder="Search for user" translatesAutoresizingMaskIntoConstraints="NO" id="gn9-w4-ytz">
+                                        <rect key="frame" x="0.0" y="1" width="568" height="44"/>
+                                        <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="C4D-gl-qTs" id="X4y-sp-8j7"/>
+                                        </connections>
+                                    </searchBar>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="gn9-w4-ytz" secondAttribute="centerX" id="Aq7-f0-tlG"/>
+                                    <constraint firstAttribute="centerY" secondItem="gn9-w4-ytz" secondAttribute="centerY" id="Tta-4x-AgA"/>
+                                    <constraint firstAttribute="height" constant="45" id="W5H-Ax-GPI"/>
+                                    <constraint firstItem="gn9-w4-ytz" firstAttribute="leading" secondItem="8HC-Ug-Oub" secondAttribute="leading" id="Zrp-oy-FsT"/>
+                                    <constraint firstAttribute="trailing" secondItem="gn9-w4-ytz" secondAttribute="trailing" id="jFO-Hb-qr4"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Aq7-f0-tlG"/>
+                                    </mask>
+                                </variation>
+                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qTm-v6-4Sr" userLabel="Relationship Scroll View">
                                 <rect key="frame" x="16" y="0.0" width="568" height="600"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cYD-VW-TAc" userLabel="conntentView">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uwN-LX-KkD" customClass="VMUser" customModule="instalkr" customModuleProvider="target">
                                         <rect key="frame" x="184" y="200" width="200" height="200"/>
                                         <color key="backgroundColor" red="0.93725490196078431" green="1" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
@@ -169,22 +203,51 @@
                                     </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="cYD-VW-TAc" secondAttribute="trailing" id="0df-iR-S4F"/>
+                                    <constraint firstItem="cYD-VW-TAc" firstAttribute="top" secondItem="qTm-v6-4Sr" secondAttribute="top" id="5zx-TH-Yyz"/>
                                     <constraint firstAttribute="centerX" secondItem="uwN-LX-KkD" secondAttribute="centerX" id="GaX-iT-ng2"/>
+                                    <constraint firstAttribute="trailing" secondItem="cYD-VW-TAc" secondAttribute="trailing" id="O6W-WT-DJl"/>
+                                    <constraint firstItem="cYD-VW-TAc" firstAttribute="top" secondItem="qTm-v6-4Sr" secondAttribute="top" id="RBW-xV-awp"/>
+                                    <constraint firstAttribute="bottom" secondItem="cYD-VW-TAc" secondAttribute="bottom" id="WlQ-oe-g7b"/>
+                                    <constraint firstAttribute="bottom" secondItem="cYD-VW-TAc" secondAttribute="bottom" id="d53-2P-F7q"/>
                                     <constraint firstAttribute="centerY" secondItem="uwN-LX-KkD" secondAttribute="centerY" id="dRS-8K-ceY"/>
+                                    <constraint firstItem="cYD-VW-TAc" firstAttribute="leading" secondItem="qTm-v6-4Sr" secondAttribute="leading" id="ffk-yG-Sh2"/>
+                                    <constraint firstItem="cYD-VW-TAc" firstAttribute="leading" secondItem="qTm-v6-4Sr" secondAttribute="leading" id="op4-Q3-kvl"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="0df-iR-S4F"/>
+                                        <exclude reference="5zx-TH-Yyz"/>
+                                        <exclude reference="WlQ-oe-g7b"/>
+                                        <exclude reference="op4-Q3-kvl"/>
+                                    </mask>
+                                </variation>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="qTm-v6-4Sr" secondAttribute="trailing" id="KeS-1H-b1s"/>
                             <constraint firstItem="qTm-v6-4Sr" firstAttribute="leading" secondItem="uXQ-zN-1W4" secondAttribute="leadingMargin" id="XdB-e4-iYN"/>
+                            <constraint firstItem="8HC-Ug-Oub" firstAttribute="leading" secondItem="uXQ-zN-1W4" secondAttribute="leadingMargin" id="eW0-RU-fdl"/>
+                            <constraint firstItem="8HC-Ug-Oub" firstAttribute="top" secondItem="lBf-ul-9Na" secondAttribute="bottom" id="isd-zE-NmI"/>
+                            <constraint firstItem="8HC-Ug-Oub" firstAttribute="top" secondItem="qTm-v6-4Sr" secondAttribute="bottom" constant="-450" id="pxz-S0-7XS"/>
                             <constraint firstItem="08C-6E-dno" firstAttribute="top" secondItem="qTm-v6-4Sr" secondAttribute="bottom" id="v0v-OP-9FY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8HC-Ug-Oub" secondAttribute="trailing" id="yEp-1F-Dxn"/>
                             <constraint firstItem="qTm-v6-4Sr" firstAttribute="top" secondItem="uXQ-zN-1W4" secondAttribute="topMargin" id="zof-te-JV2"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="pxz-S0-7XS"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
+                        <outlet property="contentView" destination="cYD-VW-TAc" id="mpY-TC-9Ta"/>
                         <outlet property="mainUserNode" destination="uwN-LX-KkD" id="gg2-Md-EV9"/>
                         <outlet property="relationshipScrollView" destination="qTm-v6-4Sr" id="xch-3k-MwY"/>
+                        <outlet property="searchBar" destination="gn9-w4-ytz" id="JcA-as-o0r"/>
+                        <outlet property="searchBarView" destination="8HC-Ug-Oub" id="QxJ-GC-LSt"/>
+                        <segue destination="msK-AK-an5" kind="presentation" identifier="graphToSearch" modalTransitionStyle="crossDissolve" id="JF8-of-CX9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4BE-39-kMi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -217,6 +280,7 @@
         <image name="incognito" width="598" height="300"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4IQ-NG-yO8"/>
+        <segue reference="JF8-of-CX9"/>
+        <segue reference="N8W-hh-BBm"/>
     </inferredMetricsTieBreakers>
 </document>

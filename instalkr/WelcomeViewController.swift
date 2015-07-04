@@ -8,6 +8,9 @@
 
 import UIKit
 
+let userPrefKeys_accessToken = "access_token"
+
+
 class WelcomeViewController : UIViewController {
 
     @IBOutlet weak var logInButton: UIButton!
@@ -18,6 +21,10 @@ class WelcomeViewController : UIViewController {
 
     @IBOutlet weak var welcomeLabel: UILabel!
     
+    
+    let goToSearch : String = "welcomeToSearch"
+    
+    let goToGraph : String = "welcomeToGraph"
 
     override func viewWillAppear(animated: Bool) {
         
@@ -33,7 +40,7 @@ class WelcomeViewController : UIViewController {
         //-->  Check for user preference if they're authenticated and have authorized your application
         let userPref = NSUserDefaults.standardUserDefaults()
         
-        if let access_token: AnyObject = userPref.objectForKey("access_token")
+        if let access_token: AnyObject = userPref.objectForKey(userPrefKeys_accessToken)
         {
             self.welcomeLabel.hidden = false
             
@@ -71,7 +78,7 @@ class WelcomeViewController : UIViewController {
                 
                 UIView.transitionFromView(viewTwo, toView: viewThree, duration: 0.7, options: UIViewAnimationOptions.TransitionCrossDissolve, completion: { (finished : Bool) -> Void in
                     
-                        self.performSegueWithIdentifier("welcomeToGraph", sender: self)
+                        self.performSegueWithIdentifier( self.goToGraph , sender: self)
                     
                 })
                 

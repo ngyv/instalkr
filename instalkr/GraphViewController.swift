@@ -9,14 +9,21 @@
 import Foundation
 import UIKit
 
-class GraphViewController : UIViewController
+class GraphViewController : UIViewController, UISearchBarDelegate
 {
     
     @IBOutlet weak var relationshipScrollView: UIScrollView!
     
+    @IBOutlet weak var contentView: UIView!
+    
+    @IBOutlet weak var searchBarView: UIView!
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     var mainUserNode : VMUser?
     var theGraph : Graph
     
+    let goToSearch : String = "graphToSearch"
     
     required init(coder aDecoder: NSCoder)
     {
@@ -25,7 +32,7 @@ class GraphViewController : UIViewController
         
         var userPref = NSUserDefaults.standardUserDefaults()
         
-        var mainUser : UserNode = UserNode(me: Model_User.createMUser(userPref.objectForKey("user")!))
+        var mainUser : UserNode = UserNode(me: Model_User.createMUser(userPref.objectForKey(userPrefKeys_user)!))
         
         self.theGraph = Graph(theMainUser: mainUser)
         
@@ -41,37 +48,27 @@ class GraphViewController : UIViewController
     
     override func viewDidLoad()
     {
-        
+ 
         super.viewDidLoad()
+        
+        self.searchBar.delegate = self
+        
         self.createUserView( true )
         self.reloadUserView(self.theGraph.userInFocus.myself, userView: mainUserNode!)
         
     }
+
+    
     
     func createUserView ( main : Bool )
     {
-        var frame : CGRect
-        var x : CGFloat
-        var y : CGFloat
-        var widthHeight : CGFloat
         
+        var widthHeight : CGFloat = main ? 200 : 160
+  
+        var x : CGFloat  = (relationshipScrollView.bounds.width - widthHeight)/2
+        var y : CGFloat  = (relationshipScrollView.bounds.height - widthHeight)/2
         
-        
-        if ( main )
-        {
-            widthHeight = 200
-            x = (relationshipScrollView.bounds.width - widthHeight)/2
-            y = (relationshipScrollView.bounds.height - widthHeight)/2
-            
-        }
-        else
-        {
-            widthHeight = 160
-            x = (relationshipScrollView.bounds.width - widthHeight)/2
-            y  = (relationshipScrollView.bounds.height - widthHeight)/2
-            
-        }
-        frame = CGRectMake(x, y, widthHeight, widthHeight)
+        var frame : CGRect = CGRectMake(x, y, widthHeight, widthHeight)
         mainUserNode = VMUser(frame: frame)
         
         x = frame.width / 20
@@ -85,6 +82,7 @@ class GraphViewController : UIViewController
         mainUserNode!.addSubview(mainUserNode!.imageView!)
         mainUserNode!.addSubview(mainUserNode!.usernameLabel!)
         
+        //self.contentView.addSubview(mainUserNode!)
         self.relationshipScrollView.addSubview(mainUserNode!)
         
         
@@ -101,12 +99,15 @@ class GraphViewController : UIViewController
         
         // Add constraints  -->   item1.attribute1 = multiplier × item2.attribute2 + constant
         
-        //  Set width & height of View
         
+        
+        //  Set width & height of View
         
         mainUserNode!.addConstraint(NSLayoutConstraint(item: mainUserNode!, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: 200))
         
         mainUserNode!.addConstraint(NSLayoutConstraint(item: mainUserNode!, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: 200))
+        
+        
         
         //  Set center of margin with regards to the superview
         
@@ -114,9 +115,9 @@ class GraphViewController : UIViewController
         
         relationshipScrollView.addConstraint(NSLayoutConstraint(item: mainUserNode!, attribute: NSLayoutAttribute.CenterYWithinMargins, relatedBy: NSLayoutRelation.Equal, toItem: relationshipScrollView, attribute: NSLayoutAttribute.CenterYWithinMargins, multiplier: 1.0, constant: 0))
         
-        
         // --> This is the damn piece I was missing all along! -.-
         mainUserNode!.setTranslatesAutoresizingMaskIntoConstraints(false)
+        
         
         
     }
@@ -128,22 +129,7 @@ class GraphViewController : UIViewController
         
         
         
-        if( theGraph.userInFocus.myself.id == user.id )
-        {
-            
-        }
-        else
-        {
-            
-        }
-        
-        
-        
-        
-        
-        
-        
-        
+
         
         // Get Image
         
@@ -183,18 +169,31 @@ class GraphViewController : UIViewController
         
         
     }
+
+
+
+    // -- Search Bar methods
+    func searchBar( searchBar: UISearchBar, textDidChange searchText: String)
+    {
+        
+    }
+
+    func searchBarSearchButtonClicked( searchBar: UISearchBar)
+    {
+        self.performSegueWithIdentifier( goToSearch , sender: self)
+    }
+
+    
+    
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
+    {
+        if (segue.identifier == goToSearch )
+        {
+    
+        }
+    }
+    
+    
+    
 }
-
-
-/*----------
-
-→  Show {relationship graph}
-
-Show main user profile picture in the middle of the screen
-the top 8 people he has tagged in his pictures should be displayed on a ring
-
-(a) if he doesn’t have any pictures, then show 8 people he follows that have the most pictures
-(b) if he is not following anyone, then show 8 people that have the most pictures follows him
-if he has insufficient contacts (< 8), then combine the pool of people (a) &
-
-*/

@@ -12,7 +12,8 @@ import UIKit
 class SearchViewController : UIViewController
 {
 
-  
+    let goToGraph : String = "searchToGraph"
+    
 
     
     required init(coder aDecoder: NSCoder)
