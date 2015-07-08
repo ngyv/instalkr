@@ -64,6 +64,8 @@ class Model_User
     }
     
     
+    //______________________________  Create functions  ______________________________
+    
     
     class func createMUser (fromJsonData : AnyObject) -> Model_User
     {
@@ -86,14 +88,15 @@ class Model_User
         return userLogged
     }
     
-    class func createListOfUsers (fromJsonData : AnyObject) -> [ Model_User ]
+    class func createListOfUsers (fromJsonData : [ AnyObject ]) -> [ Model_User ]
     {
         var listOfUsers : [ Model_User ] = [ Model_User ]()
-        if( (fromJsonData as! [ AnyObject ]).count > 0)
+        if( fromJsonData.count > 0)
         {
-            if( fromJsonData.objectAtIndex(0).allKeys.count == 4 )
+            // User Follows & Followed_Bys
+            if( fromJsonData[0].allKeys.count == 4 )
             {
-                for eachUser in (fromJsonData as! [AnyObject])
+                for eachUser in fromJsonData
                 {
                     listOfUsers.append( Model_User(
                         id: eachUser.objectForKey("id") as! String,
@@ -103,9 +106,9 @@ class Model_User
                         ))
                 }
             }
-            else if( fromJsonData.objectAtIndex(0).allKeys.count == 4 )
+            else if( fromJsonData[0].allKeys.count == 5 )
             {
-                for eachUser in (fromJsonData as! [AnyObject])
+                for eachUser in fromJsonData 
                 {
                     listOfUsers.append( Model_User(
                         id: eachUser.objectForKey("id") as! String,
@@ -122,5 +125,42 @@ class Model_User
     }
     
     
+    //______________________________  Sort functions  ______________________________
+    
+    // $0.propertyName > $1.propertyName     for Descending order
+    //                 <                     for Ascending order
+    
+    class func sortMostFollowedByUsers ( inout fromUsersArray : [ Model_User ] )
+    {
+        fromUsersArray.sort({ $0.counts["followed_by"] > $1.counts["followed_by"] })
+    }
+    
+    class func sortMostFollowsUsers ( inout fromUsersArray : [ Model_User ] )
+    {
+        fromUsersArray.sort({ $0.counts["follows"] > $1.counts["follows"] })
+    }
+    
+    class func sortMostMediaUsers ( inout fromUsersArray : [ Model_User ] )
+    {
+        fromUsersArray.sort({ $0.counts["media"] > $1.counts["media"] })
+    }
+    
+    
+    
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
