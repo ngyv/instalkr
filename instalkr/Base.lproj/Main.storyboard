@@ -307,7 +307,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="C4D-gl-qTs" kind="presentation" identifier="logInToSearch" modalTransitionStyle="crossDissolve" id="4IQ-NG-yO8"/>
+                        <segue destination="C4D-gl-qTs" kind="presentation" identifier="logInToGraph" modalTransitionStyle="crossDissolve" id="4IQ-NG-yO8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LxQ-xV-Ska" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -319,7 +319,7 @@
         <image name="incognito" width="598" height="300"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JF8-of-CX9"/>
-        <segue reference="N8W-hh-BBm"/>
+        <segue reference="bAN-KW-fTw"/>
+        <segue reference="4IQ-NG-yO8"/>
     </inferredMetricsTieBreakers>
 </document>

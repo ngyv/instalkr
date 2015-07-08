@@ -20,7 +20,8 @@ class UserNode
         self.myself = me
         self.myTopContacts = topContacts
     }
-
+    
+    
 //*** may want to alter this later
     convenience init ( me : Model_User )
     {
@@ -31,14 +32,14 @@ class UserNode
 
 class Graph
 {
-    var listOfUserNodes : [ String : Model_User ] = [ String : Model_User ]()
+    var listOfUserNodes : [ UserNode ] = [ UserNode ]()
     
     var userInFocus : UserNode
     
     // to get the subgraph in focus
     var degreeOfSeparationInFocus : Int = 3
     
-    init( allUsers : [ String : Model_User ] , theMainUser : UserNode , theDegreeOfSeparation : Int )
+    init( allUsers : [ UserNode ] , theMainUser : UserNode , theDegreeOfSeparation : Int )
     {
         self.listOfUserNodes = allUsers
         self.userInFocus = theMainUser
@@ -48,15 +49,30 @@ class Graph
     
     convenience init( theMainUser : UserNode )
     {
-        var all_users : [ String : Model_User ] = [ theMainUser.myself.id : theMainUser.myself ]
+        var all_users : [ UserNode ] = [ theMainUser ]
         
         for contacts in theMainUser.myTopContacts
         {
-            all_users[ contacts.id ] = contacts
+            all_users.append( UserNode(me: contacts) )
         }
         
         self.init( allUsers: all_users, theMainUser: theMainUser, theDegreeOfSeparation: 3)
     }
 
+    
+    
+    
+    
+    func swapUserNode ( user : UserNode )
+    {
+        for var i = 0; i < self.listOfUserNodes.count; i++
+        {
+            if self.listOfUserNodes[i].myself.id == user.myself.id
+            {
+                self.listOfUserNodes[i] = user
+            }
+        }
+    }
+    
     
 }

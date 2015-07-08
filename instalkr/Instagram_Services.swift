@@ -35,10 +35,15 @@ class Instagram_Services
                 theUser = Model_User.createMUser(jsonData.objectForKey("data")!)
                 
                 
-            })
+            }).resume()
         }
         
         return theUser!
+    }
+    
+    func populateMoreUserInfo ( inout user : Model_User )
+    {
+        user = populateUserData(user.id)
     }
     
     
@@ -58,29 +63,38 @@ class Instagram_Services
                 {
                     recentMedia.append(Model_Media.createMMedia(eachItem))
                 }
-            })
+            }).resume()
         }
         
         return recentMedia
     }
     
+    /*
+    ________________ Needs work
     
-    func populateUsersFollows ( user_id : String ) -> [ Model_User ]
+    
+    
+    
+    func populateUsersFollows ( user_id : String ) -> [ Model_User ]?
     {
-        var userFollows : [ Model_User ] = [ Model_User ]()
+        var userFollows : [ Model_User ]?
         
         if let url : NSURL = NSURL ( string: Instagram_API.getRelationshipUserFollows(access_token, user_id: user_id) )
         {
+            
             theSession.dataTaskWithURL(url, completionHandler: {
                 
                 (data, response, error) -> Void in
-            
+                
                 let jsonData : AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
                 
-                userFollows = Model_User.createListOfUsers(jsonData.objectForKey("data")!)
+                userFollows = Model_User.createListOfUsers( jsonData.objectForKey("data") as! [AnyObject])
                 
+          
                 
-            })
+            }).resume()
+
+            
         }
         
         
@@ -101,10 +115,10 @@ class Instagram_Services
                 let jsonData : AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
                 
                 
-                usersFollowedBy = Model_User.createListOfUsers(jsonData.objectForKey("data")!)
+                usersFollowedBy = Model_User.createListOfUsers(jsonData.objectForKey("data")! as! [AnyObject])
                 
                 
-            })
+            }).resume()
             
         }
         
@@ -124,8 +138,8 @@ class Instagram_Services
                 
                 let jsonData : AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
                 
-                userResults = Model_User.createListOfUsers(jsonData.objectForKey("data")!)
-            })
+                userResults = Model_User.createListOfUsers(jsonData.objectForKey("data")! as! [AnyObject])
+            }).resume()
             
         }
         
@@ -133,7 +147,7 @@ class Instagram_Services
     }
     
     
-    
+    */
     
     //___________________ Loading into Views ___________________
     

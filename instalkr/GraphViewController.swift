@@ -22,6 +22,8 @@ class GraphViewController : UIViewController, UISearchBarDelegate
     
     var mainUserNode : VMUser?
     var theGraph : Graph
+    var theAlgorithm : Algorithm?
+    
     
     let goToSearch : String = "graphToSearch"
     
@@ -33,13 +35,13 @@ class GraphViewController : UIViewController, UISearchBarDelegate
         var userPref = NSUserDefaults.standardUserDefaults()
         
         var mainUser : UserNode = UserNode(me: Model_User.createMUser(userPref.objectForKey(userPrefKeys_user)!))
-        
+            
         self.theGraph = Graph(theMainUser: mainUser)
-        
-        
+            
+  //      self.theAlgorithm = Algorithm_PopularContacts(someGraph: theGraph)
+
         super.init(coder: aDecoder)
     }
-    
     
     override func viewWillAppear(animated: Bool)
     {
@@ -53,12 +55,41 @@ class GraphViewController : UIViewController, UISearchBarDelegate
         
         self.searchBar.delegate = self
         
+
+        var services =   Instagram_Services(access_token: NSUserDefaults.standardUserDefaults().objectForKey(userPrefKeys_accessToken) as! String )
+        
+/*
+        if let getTop = theAlgorithm.getUserTopContacts(theGraph.userInFocus)
+        {
+            theGraph.userInFocus.myTopContacts = getTop
+            for eachUser in theGraph.userInFocus.myTopContacts
+            {
+                theGraph.listOfUserNodes.append(UserNode(me: eachUser))
+            }
+            var topContacts : [ Model_User ] = theAlgorithm.theGraph.userInFocus.myTopContacts
+        }
+
+*/
         self.createUserView( true )
         self.reloadUserView(self.theGraph.userInFocus.myself, userView: mainUserNode!)
         
     }
 
+    override func viewWillDisappear(animated: Bool)
+    {
+        //-- development purposes
+        var userPref = NSUserDefaults.standardUserDefaults()
+        
+        
+        userPref.setObject(theGraph.userInFocus.myself.id, forKey: "userInFocus")
+        var uids : [ String ] = theGraph.userInFocus.myTopContacts.map{ return $0.id }
+        userPref.setObject( uids, forKey: "topUsers")
+        
+        //--
+        
+        super.viewWillDisappear(animated)
     
+    }
     
     func createUserView ( main : Bool )
     {
