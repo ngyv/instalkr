@@ -8,7 +8,7 @@
 
 import UIKit
 
-let userPrefKeys_accessToken = "access_token"
+let userPrefKeys_accessToken : String = "access_token"
 
 
 class WelcomeViewController : UIViewController {
@@ -25,6 +25,8 @@ class WelcomeViewController : UIViewController {
     let goToSearch : String = "welcomeToSearch"
     
     let goToGraph : String = "welcomeToGraph"
+    
+    let goToLogIn : String = "welcomeToLogIn"
 
     override func viewWillAppear(animated: Bool) {
         
@@ -42,12 +44,15 @@ class WelcomeViewController : UIViewController {
         
         if let access_token: AnyObject = userPref.objectForKey(userPrefKeys_accessToken)
         {
-            self.welcomeLabel.hidden = false
+            if let userExists: AnyObject = userPref.objectForKey(userPrefKeys_user)
+            {
+                self.welcomeLabel.hidden = false
             
-            self.logInButton.hidden = true
-            self.continueAsGuestButton.hidden = true
+                self.logInButton.hidden = true
+                self.continueAsGuestButton.hidden = true
             
-            self.bounceImageAndGoSearch()
+                self.bounceImageAndGoSearch()
+            }
             
         }
         

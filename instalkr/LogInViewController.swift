@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import WebKit
 
-let userPrefKeys_user = "user"
+let userPrefKeys_user : String = "user"
 
 class LogInViewController : UIViewController, WKNavigationDelegate
 {
@@ -19,7 +19,7 @@ class LogInViewController : UIViewController, WKNavigationDelegate
     
     let given_redirect : String = "http://sassycodes.tumblr.com"
     
-    let goToSearch : String = "logInToSearch"
+    let goToGraph : String = "logInToGraph"
     
     var access_token : String?
     
@@ -113,9 +113,12 @@ class LogInViewController : UIViewController, WKNavigationDelegate
                 
                 userPref.setObject(jsonData.objectForKey("data")!, forKey: userPrefKeys_user)
                 
+                
+                self.performSegueWithIdentifier(self.goToGraph, sender: self)
+
+                
             }).resume()
             
-            self.performSegueWithIdentifier(goToSearch, sender: self)
             
             
            
