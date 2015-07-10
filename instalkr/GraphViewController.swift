@@ -56,7 +56,6 @@ class GraphViewController : UIViewController, UISearchBarDelegate
         self.searchBar.delegate = self
         
 
-        var services =   Instagram_Services(access_token: NSUserDefaults.standardUserDefaults().objectForKey(userPrefKeys_accessToken) as! String )
         
 /*
         if let getTop = theAlgorithm.getUserTopContacts(theGraph.userInFocus)
@@ -72,6 +71,8 @@ class GraphViewController : UIViewController, UISearchBarDelegate
 */
         self.createUserView( true )
         self.reloadUserView(self.theGraph.userInFocus.myself, userView: mainUserNode!)
+        
+        self.getContacts(self.theGraph.userInFocus.myself.id)
         
     }
 
@@ -199,7 +200,84 @@ class GraphViewController : UIViewController, UISearchBarDelegate
         
     }
 
-
+    func getContacts( user_id : String )
+    {
+        self.getFollows(user_id)
+        self.getFollowedBys(user_id)
+        
+    }
+    
+    
+    func getFollows ( user_id : String )
+    {
+        
+        
+        var theSession = NSURLSession.sharedSession()
+        var access_token : String = NSUserDefaults.standardUserDefaults().objectForKey(userPrefKeys_accessToken) as! String
+        if let url : NSURL = NSURL( string: Instagram_API.getRelationshipUserFollows(access_token, user_id: user_id) )
+        {
+            var req : NSURLRequest = NSURLRequest(URL: url)
+            theSession.dataTaskWithRequest(req, completionHandler:  {
+                
+                ( data, response, error ) -> Void in
+                
+                let jsonData: AnyObject = NSJSONSerialization.JSONObjectWithData( data, options: NSJSONReadingOptions.MutableContainers, error: nil )!
+                
+                var array : NSMutableArray = jsonData.objectForKey("data")! as! NSMutableArray
+                
+                for eachUser in array
+                {
+                    var u : Model_User = Model_User(id: eachUser.objectForKey("id") as! String,
+                        username: eachUser.objectForKey("username") as! String,
+                        full_name: eachUser.objectForKey("full_name") as! String,
+                        profile_picture: eachUser.objectForKey("profile_picture") as! String)
+                    
+                    
+                    self.theGraph.userInFocus.myTopContacts.append( u )
+                }
+                
+                NSLog("Follows : \n\n\(self.theGraph.userInFocus.myTopContacts.count)\n")
+            }).resume()
+            
+        }
+        
+        
+    }
+    
+    func getFollowedBys ( user_id : String )
+    {
+        
+        var theSession = NSURLSession.sharedSession()
+        var access_token : String = NSUserDefaults.standardUserDefaults().objectForKey(userPrefKeys_accessToken) as! String
+        
+        if let url : NSURL = NSURL ( string: Instagram_API.getRelationshipUserFollowedBy(access_token, user_id: user_id) )
+        {
+            theSession.dataTaskWithURL(url, completionHandler: {
+                
+                (data, response, error) -> Void in
+                
+                let jsonData : AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+                
+                var array : NSMutableArray = jsonData.objectForKey("data")! as! NSMutableArray
+                
+                for eachUser in array
+                {
+                    var u : Model_User = Model_User(id: eachUser.objectForKey("id") as! String,
+                        username: eachUser.objectForKey("username") as! String,
+                        full_name: eachUser.objectForKey("full_name") as! String,
+                        profile_picture: eachUser.objectForKey("profile_picture") as! String)
+                    
+                    
+                    self.theGraph.userInFocus.myTopContacts.append( u )
+                }
+                
+                NSLog("Followed By : \n\n\(self.theGraph.userInFocus.myTopContacts.count)\n")
+            }).resume()
+            
+        }
+        
+        
+    }
 
     // -- Search Bar methods
     func searchBar( searchBar: UISearchBar, textDidChange searchText: String)

@@ -8,14 +8,18 @@
 
 import Foundation
 
+let contactsFollows : String = "follows"
+let contactsFollowedBy : String = "followedBy"
+
 class UserNode
 {
+    
     // neighbours
-    var myTopContacts : [ Model_User ] = [ Model_User ]()
+    var myTopContacts : [String : [ Model_User ]] = [ String : [ Model_User ]]()
     
     var myself : Model_User
     
-    init( me : Model_User, topContacts : [ Model_User ] )
+    init( me : Model_User, topContacts : [String : [ Model_User ]] )
     {
         self.myself = me
         self.myTopContacts = topContacts
@@ -25,13 +29,14 @@ class UserNode
 //*** may want to alter this later
     convenience init ( me : Model_User )
     {
-        self.init( me : me, topContacts : [Model_User]() )
+        self.init( me : me, topContacts : [ contactsFollows : [Model_User](), contactsFollowedBy : [Model_User]() ] )
     }
 }
 
 
 class Graph
 {
+    
     var listOfUserNodes : [ UserNode ] = [ UserNode ]()
     
     var userInFocus : UserNode
@@ -51,7 +56,12 @@ class Graph
     {
         var all_users : [ UserNode ] = [ theMainUser ]
         
-        for contacts in theMainUser.myTopContacts
+        for contacts in theMainUser.myTopContacts[contactsFollows]!
+        {
+            all_users.append( UserNode(me: contacts) )
+        }
+        
+        for contacts in theMainUser.myTopContacts[contactsFollowedBy]!
         {
             all_users.append( UserNode(me: contacts) )
         }

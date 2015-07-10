@@ -69,37 +69,43 @@ class Instagram_Services
         return recentMedia
     }
     
-    /*
-    ________________ Needs work
     
+
     
-    
-    
-    func populateUsersFollows ( user_id : String ) -> [ Model_User ]?
+    func populateUsersFollows ( user_id : String ) -> [ Model_User ]
     {
-        var userFollows : [ Model_User ]?
+        var userFollows : [ Model_User ] = [ Model_User ]()
         
-        if let url : NSURL = NSURL ( string: Instagram_API.getRelationshipUserFollows(access_token, user_id: user_id) )
+        if let url : NSURL = NSURL( string: Instagram_API.getRelationshipUserFollows(access_token, user_id: user_id) )
         {
             
             theSession.dataTaskWithURL(url, completionHandler: {
                 
-                (data, response, error) -> Void in
+                ( data, response, error ) -> Void in
+            
+                let jsonData: AnyObject = NSJSONSerialization.JSONObjectWithData( data, options: NSJSONReadingOptions.MutableContainers, error: nil )!
                 
-                let jsonData : AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
-                
-                userFollows = Model_User.createListOfUsers( jsonData.objectForKey("data") as! [AnyObject])
-                
-          
+                var array : NSMutableArray = jsonData.objectForKey("data")! as! NSMutableArray
+                for eachUser in array
+                {
+                    userFollows.append( Model_User(id: eachUser.objectForKey("id") as! String,
+                        username: eachUser.objectForKey("username") as! String,
+                        full_name: eachUser.objectForKey("full_name") as! String,
+                        profile_picture: eachUser.objectForKey("profile_picture") as! String) )
+                }
                 
             }).resume()
-
             
         }
         
         
+        
+        
         return userFollows
     }
+    
+    /*
+    ________________ Needs work
     
     
     func populateUsersFollowedBy ( user_id : String ) -> [ Model_User ]

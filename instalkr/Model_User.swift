@@ -88,42 +88,41 @@ class Model_User
         return userLogged
     }
     
-    class func createListOfUsers (fromJsonData : [ AnyObject ]) -> [ Model_User ]
+    class func createListOfUsersFullName (fromJsonData : [ AnyObject ]) -> [ Model_User ]
     {
-        var listOfUsers : [ Model_User ] = [ Model_User ]()
-        if( fromJsonData.count > 0)
-        {
-            // User Follows & Followed_Bys
-            if( fromJsonData[0].allKeys.count == 4 )
-            {
-                for eachUser in fromJsonData
-                {
-                    listOfUsers.append( Model_User(
-                        id: eachUser.objectForKey("id") as! String,
-                        username: eachUser.objectForKey("username") as! String,
-                        full_name: eachUser.objectForKey("full_name") as! String,
-                        profile_picture: eachUser.objectForKey("profile_picture") as! String
-                        ))
-                }
-            }
-            else if( fromJsonData[0].allKeys.count == 5 )
-            {
-                for eachUser in fromJsonData 
-                {
-                    listOfUsers.append( Model_User(
-                        id: eachUser.objectForKey("id") as! String,
-                        username: eachUser.objectForKey("username") as! String,
-                        profile_picture: eachUser.objectForKey("profile_picture") as! String,
-                        first_name: eachUser.objectForKey("first_name") as! String,
-                        last_name: eachUser.objectForKey("last_name") as! String
-                        ))
-                }
-            }
-        }
+         var listOfUsers : [ Model_User ] = [ Model_User ]()
+         for eachUser in fromJsonData
+         {
+              listOfUsers.append( Model_User(
+                    id: eachUser.objectForKey("id") as! String,
+                    username: eachUser.objectForKey("username") as! String,
+                    full_name: eachUser.objectForKey("full_name") as! String,
+                    profile_picture: eachUser.objectForKey("profile_picture") as! String
+              ))
+          }
+        
+        
         
         return listOfUsers
     }
     
+    class func createListOfUsersFirstLastName ( fromJsonData : [ AnyObject ] ) -> [ Model_User ]
+    {
+        var listOfUsers : [ Model_User ] = [ Model_User ]()
+        for eachUser in fromJsonData
+        {
+            listOfUsers.append( Model_User(
+                id: eachUser.objectForKey("id") as! String,
+                username: eachUser.objectForKey("username") as! String,
+                profile_picture: eachUser.objectForKey("profile_picture") as! String,
+                first_name: eachUser.objectForKey("first_name") as! String,
+                last_name: eachUser.objectForKey("last_name") as! String
+                ))
+        }
+        
+        
+        return listOfUsers
+    }
     
     //______________________________  Sort functions  ______________________________
     
@@ -146,17 +145,12 @@ class Model_User
     }
     
     
+    //______________________________________________________________________________
     
     
+
+
 }
-
-
-
-
-
-
-
-
 
 
 
