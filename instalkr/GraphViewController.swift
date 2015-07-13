@@ -82,9 +82,9 @@ class GraphViewController : UIViewController, UISearchBarDelegate
         var userPref = NSUserDefaults.standardUserDefaults()
         
         
-        userPref.setObject(theGraph.userInFocus.myself.id, forKey: "userInFocus")
-        var uids : [ String ] = theGraph.userInFocus.myTopContacts.map{ return $0.id }
-        userPref.setObject( uids, forKey: "topUsers")
+        //userPref.setObject(theGraph.userInFocus.myself.id, forKey: "userInFocus")
+        //var uids : [ String ] = theGraph.userInFocus.myTopContacts.map{ return $0.id }
+        //userPref.setObject( uids, forKey: "topUsers")
         
         //--
         
@@ -233,7 +233,7 @@ class GraphViewController : UIViewController, UISearchBarDelegate
                         profile_picture: eachUser.objectForKey("profile_picture") as! String)
                     
                     
-                    self.theGraph.userInFocus.myTopContacts.append( u )
+                    self.theGraph.userInFocus.myTopContacts[contactsFollows]?.append(u)
                 }
                 
                 NSLog("Follows : \n\n\(self.theGraph.userInFocus.myTopContacts.count)\n")
@@ -268,7 +268,7 @@ class GraphViewController : UIViewController, UISearchBarDelegate
                         profile_picture: eachUser.objectForKey("profile_picture") as! String)
                     
                     
-                    self.theGraph.userInFocus.myTopContacts.append( u )
+                    self.theGraph.userInFocus.myTopContacts[contactsFollowedBy]?.append( u )
                 }
                 
                 NSLog("Followed By : \n\n\(self.theGraph.userInFocus.myTopContacts.count)\n")
