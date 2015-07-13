@@ -226,11 +226,34 @@
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uwN-LX-KkD" customClass="VMUser" customModule="instalkr" customModuleProvider="target">
                                         <rect key="frame" x="184" y="178" width="200" height="200"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TnP-RL-rRU" customClass="VMImg" customModule="instalkr" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="180" id="I0w-h8-A8s"/>
+                                                    <constraint firstAttribute="width" constant="180" id="scG-JQ-oLW"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" tag="1011" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6F7-iv-63a" customClass="VMLabel" customModule="instalkr" customModuleProvider="target">
+                                                <rect key="frame" x="79" y="90" width="42" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="QVf-G0-tsF"/>
+                                                    <constraint firstAttribute="width" constant="180" id="cDW-05-EeD"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
                                         <color key="backgroundColor" red="0.93725490196078431" green="1" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="5Oh-6o-iwB"/>
                                             <constraint firstAttribute="height" constant="200" id="6f3-7I-USv"/>
+                                            <constraint firstAttribute="centerX" secondItem="6F7-iv-63a" secondAttribute="centerX" id="AVj-Tw-a4E"/>
+                                            <constraint firstItem="TnP-RL-rRU" firstAttribute="top" secondItem="uwN-LX-KkD" secondAttribute="top" id="H8p-a5-aze"/>
+                                            <constraint firstAttribute="centerX" secondItem="TnP-RL-rRU" secondAttribute="centerX" id="Vh8-IT-al0"/>
                                             <constraint firstAttribute="height" constant="200" id="Ysi-76-x98"/>
+                                            <constraint firstItem="6F7-iv-63a" firstAttribute="top" secondItem="TnP-RL-rRU" secondAttribute="bottom" id="dMP-bH-2zc"/>
                                             <constraint firstAttribute="width" constant="200" id="xjB-VP-xmj"/>
                                         </constraints>
                                         <variation key="default">
@@ -240,52 +263,190 @@
                                             </mask>
                                         </variation>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrP-XL-hot">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrP-XL-hot" userLabel="Follows (M)" customClass="VMUser" customModule="instalkr" customModuleProvider="target">
                                         <rect key="frame" x="234" y="70" width="100" height="100"/>
-                                        <color key="backgroundColor" red="0.97170524120000001" green="0.90296107510000001" blue="1" alpha="0.79000000000000004" colorSpace="calibratedRGB"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" tag="102" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z40-HC-JL9" customClass="VMImg" customModule="instalkr" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="90" id="Uhy-1U-2kH"/>
+                                                    <constraint firstAttribute="width" constant="90" id="tP4-gQ-aAC"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" tag="1022" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gKM-xZ-Pfp" customClass="VMLabel" customModule="instalkr" customModuleProvider="target">
+                                                <rect key="frame" x="29" y="40" width="42" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="180" id="jd6-3E-rex"/>
+                                                    <constraint firstAttribute="height" constant="20" id="taJ-3w-yvs"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="14"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.97170524120000001" green="0.90296107510000001" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="centerX" secondItem="z40-HC-JL9" secondAttribute="centerX" id="3UO-lB-Q6n"/>
+                                            <constraint firstAttribute="centerX" secondItem="gKM-xZ-Pfp" secondAttribute="centerX" id="4MU-Jc-Wft"/>
                                             <constraint firstAttribute="height" constant="100" id="7c9-Mu-TtW"/>
                                             <constraint firstAttribute="width" constant="100" id="Ovw-Qc-UrZ"/>
+                                            <constraint firstItem="gKM-xZ-Pfp" firstAttribute="top" secondItem="z40-HC-JL9" secondAttribute="bottom" id="Zhk-8Q-7d7"/>
+                                            <constraint firstItem="z40-HC-JL9" firstAttribute="top" secondItem="xrP-XL-hot" secondAttribute="top" id="sKL-xj-EIa"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="941-2T-4dS">
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="941-2T-4dS" userLabel="Follows (L)" customClass="VMUser" customModule="instalkr" customModuleProvider="target">
                                         <rect key="frame" x="67" y="70" width="100" height="100"/>
-                                        <color key="backgroundColor" red="0.97170524120000001" green="0.90296107510000001" blue="1" alpha="0.79000000000000004" colorSpace="calibratedRGB"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" tag="103" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DpJ-GL-8ql" customClass="VMImg" customModule="instalkr" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="90" id="oC3-Uz-aV7"/>
+                                                    <constraint firstAttribute="width" constant="90" id="oTR-h5-40J"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" tag="1033" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WtV-b5-LUQ" customClass="VMLabel" customModule="instalkr" customModuleProvider="target">
+                                                <rect key="frame" x="29" y="40" width="42" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="eEs-Cq-du4"/>
+                                                    <constraint firstAttribute="width" constant="180" id="r9T-e1-TV4"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="14"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.97170524120000001" green="0.90296107510000001" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="O81-MI-zS5"/>
+                                            <constraint firstAttribute="centerX" secondItem="DpJ-GL-8ql" secondAttribute="centerX" id="lff-0f-70y"/>
+                                            <constraint firstItem="WtV-b5-LUQ" firstAttribute="top" secondItem="DpJ-GL-8ql" secondAttribute="bottom" id="mVr-fV-Rro"/>
+                                            <constraint firstItem="DpJ-GL-8ql" firstAttribute="top" secondItem="941-2T-4dS" secondAttribute="top" id="rbm-Qv-EIF"/>
+                                            <constraint firstAttribute="centerX" secondItem="WtV-b5-LUQ" secondAttribute="centerX" id="t2f-Wz-yd4"/>
                                             <constraint firstAttribute="width" constant="100" id="xfc-sP-krR"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EMJ-r5-AYm">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EMJ-r5-AYm" userLabel="Follows (R)" customClass="VMUser" customModule="instalkr" customModuleProvider="target">
                                         <rect key="frame" x="355" y="70" width="100" height="100"/>
-                                        <color key="backgroundColor" red="0.97170524120000001" green="0.90296107510000001" blue="1" alpha="0.79000000000000004" colorSpace="calibratedRGB"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" tag="104" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IQK-hK-ZMg" customClass="VMImg" customModule="instalkr" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="90" id="ryV-li-nC7"/>
+                                                    <constraint firstAttribute="height" constant="90" id="sSl-oX-jyS"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" tag="1044" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEf-mF-GQk" customClass="VMLabel" customModule="instalkr" customModuleProvider="target">
+                                                <rect key="frame" x="29" y="40" width="42" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="180" id="EQS-Qe-494"/>
+                                                    <constraint firstAttribute="height" constant="20" id="bEq-bw-IeJ"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="14"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.97170524120000001" green="0.90296107510000001" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstItem="EEf-mF-GQk" firstAttribute="top" secondItem="IQK-hK-ZMg" secondAttribute="bottom" id="2lC-F6-UPy"/>
                                             <constraint firstAttribute="height" constant="100" id="3c0-8g-JO0"/>
                                             <constraint firstAttribute="width" constant="100" id="Dpt-pW-ffk"/>
+                                            <constraint firstAttribute="centerX" secondItem="IQK-hK-ZMg" secondAttribute="centerX" id="Sfy-Or-Eeg"/>
+                                            <constraint firstItem="IQK-hK-ZMg" firstAttribute="top" secondItem="EMJ-r5-AYm" secondAttribute="top" id="bms-Ah-X9P"/>
+                                            <constraint firstAttribute="centerX" secondItem="EEf-mF-GQk" secondAttribute="centerX" id="he6-De-vh6"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P69-wf-IY4">
-                                        <rect key="frame" x="234" y="428" width="100" height="100"/>
-                                        <color key="backgroundColor" red="0.97170524120000001" green="0.90296107510000001" blue="1" alpha="0.79000000000000004" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="8qa-nG-63k"/>
-                                            <constraint firstAttribute="width" constant="100" id="hGR-wX-2GZ"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OBE-cX-QHr">
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OBE-cX-QHr" userLabel="Followed By (L)" customClass="VMUser" customModule="instalkr" customModuleProvider="target">
                                         <rect key="frame" x="67" y="454" width="100" height="100"/>
-                                        <color key="backgroundColor" red="0.97170524120000001" green="0.90296107510000001" blue="1" alpha="0.79000000000000004" colorSpace="calibratedRGB"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" tag="106" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v8e-bq-cvm" customClass="VMImg" customModule="instalkr" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="90" id="72G-IR-gmi"/>
+                                                    <constraint firstAttribute="width" constant="90" id="nci-Af-yfs"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" tag="1066" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQK-dK-CoD" customClass="VMLabel" customModule="instalkr" customModuleProvider="target">
+                                                <rect key="frame" x="29" y="40" width="42" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="Rz0-dt-SZs"/>
+                                                    <constraint firstAttribute="width" constant="180" id="rFE-Nq-ouO"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="14"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.97170524120000001" green="0.90296107510000001" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="centerX" secondItem="FQK-dK-CoD" secondAttribute="centerX" id="5U7-YI-2R0"/>
+                                            <constraint firstItem="v8e-bq-cvm" firstAttribute="top" secondItem="OBE-cX-QHr" secondAttribute="top" id="75Z-xV-HI9"/>
+                                            <constraint firstAttribute="centerX" secondItem="v8e-bq-cvm" secondAttribute="centerX" id="RP7-QS-wDW"/>
+                                            <constraint firstItem="FQK-dK-CoD" firstAttribute="top" secondItem="v8e-bq-cvm" secondAttribute="bottom" id="Z9f-8s-UvR"/>
                                             <constraint firstAttribute="width" constant="100" id="nHP-6J-kdA"/>
                                             <constraint firstAttribute="height" constant="100" id="yad-Kf-NhU"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rPH-44-0Ue">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rPH-44-0Ue" userLabel="Followed By (R)" customClass="VMUser" customModule="instalkr" customModuleProvider="target">
                                         <rect key="frame" x="369" y="454" width="100" height="100"/>
-                                        <color key="backgroundColor" red="0.97170524120000001" green="0.90296107510000001" blue="1" alpha="0.79000000000000004" colorSpace="calibratedRGB"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" tag="107" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o0i-tj-ckq" customClass="VMImg" customModule="instalkr" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="90" id="MZr-YJ-HIY"/>
+                                                    <constraint firstAttribute="width" constant="90" id="ZKc-8e-5Dp"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" tag="1077" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ibt-o6-i0v" customClass="VMLabel" customModule="instalkr" customModuleProvider="target">
+                                                <rect key="frame" x="29" y="40" width="42" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="02v-UK-lU7"/>
+                                                    <constraint firstAttribute="width" constant="180" id="mfO-TV-kls"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="14"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.97170524120000001" green="0.90296107510000001" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="0cG-fj-iXF"/>
+                                            <constraint firstAttribute="centerX" secondItem="o0i-tj-ckq" secondAttribute="centerX" id="PmF-lY-bEp"/>
+                                            <constraint firstItem="ibt-o6-i0v" firstAttribute="top" secondItem="o0i-tj-ckq" secondAttribute="bottom" id="XMQ-vT-nml"/>
                                             <constraint firstAttribute="width" constant="100" id="Xbc-tn-apG"/>
+                                            <constraint firstAttribute="centerX" secondItem="ibt-o6-i0v" secondAttribute="centerX" id="dq7-bM-bFV"/>
+                                            <constraint firstItem="o0i-tj-ckq" firstAttribute="top" secondItem="rPH-44-0Ue" secondAttribute="top" id="foH-2r-XhX"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P69-wf-IY4" userLabel="Followed By (M)" customClass="VMUser" customModule="instalkr" customModuleProvider="target">
+                                        <rect key="frame" x="234" y="428" width="100" height="100"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" tag="105" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Jv-62-1gU" customClass="VMImg" customModule="instalkr" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="90" id="7Zf-LK-1Xd"/>
+                                                    <constraint firstAttribute="width" constant="90" id="dVv-s3-qr0"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" tag="1055" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="spv-2q-4b3" customClass="VMLabel" customModule="instalkr" customModuleProvider="target">
+                                                <rect key="frame" x="29" y="40" width="42" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="180" id="ZLN-Px-jTe"/>
+                                                    <constraint firstAttribute="height" constant="20" id="oCD-xh-oJ6"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="14"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.97170524120000001" green="0.90296107510000001" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="centerX" secondItem="8Jv-62-1gU" secondAttribute="centerX" id="50H-B4-W4t"/>
+                                            <constraint firstAttribute="centerX" secondItem="spv-2q-4b3" secondAttribute="centerX" id="54s-BX-wQF"/>
+                                            <constraint firstAttribute="height" constant="100" id="8qa-nG-63k"/>
+                                            <constraint firstItem="spv-2q-4b3" firstAttribute="top" secondItem="8Jv-62-1gU" secondAttribute="bottom" id="Lmf-HC-IF1"/>
+                                            <constraint firstAttribute="width" constant="100" id="hGR-wX-2GZ"/>
+                                            <constraint firstItem="8Jv-62-1gU" firstAttribute="top" secondItem="P69-wf-IY4" secondAttribute="top" id="oQk-Db-q8N"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -330,7 +491,13 @@
                     </view>
                     <connections>
                         <outlet property="contentView" destination="cYD-VW-TAc" id="mpY-TC-9Ta"/>
-                        <outlet property="mainUserNode" destination="uwN-LX-KkD" id="gg2-Md-EV9"/>
+                        <outlet property="followedByLeftNode" destination="OBE-cX-QHr" id="Vgc-LH-4IX"/>
+                        <outlet property="followedByMiddleNode" destination="P69-wf-IY4" id="dca-EY-4t5"/>
+                        <outlet property="followedByRightNode" destination="rPH-44-0Ue" id="hEc-xt-dju"/>
+                        <outlet property="followsLeftNode" destination="941-2T-4dS" id="vEP-Ys-vBn"/>
+                        <outlet property="followsMiddleNode" destination="xrP-XL-hot" id="vnH-wV-er8"/>
+                        <outlet property="followsRightNode" destination="EMJ-r5-AYm" id="Qwp-PA-WCC"/>
+                        <outlet property="mainUserNode" destination="uwN-LX-KkD" id="DM8-2Q-KTF"/>
                         <outlet property="relationshipScrollView" destination="qTm-v6-4Sr" id="xch-3k-MwY"/>
                         <outlet property="searchBar" destination="gn9-w4-ytz" id="JcA-as-o0r"/>
                         <outlet property="searchBarView" destination="8HC-Ug-Oub" id="QxJ-GC-LSt"/>
@@ -338,6 +505,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4BE-39-kMi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="up" id="pXK-cE-JLd"/>
             </objects>
             <point key="canvasLocation" x="1114" y="1153"/>
         </scene>

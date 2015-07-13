@@ -20,10 +20,20 @@ class GraphViewController : UIViewController, UISearchBarDelegate
     
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var mainUserNode : VMUser?
+    
+    @IBOutlet weak var mainUserNode: VMUser!
+    @IBOutlet weak var followsMiddleNode: VMUser!
+    @IBOutlet weak var followsLeftNode: VMUser!
+    @IBOutlet weak var followsRightNode: VMUser!
+    @IBOutlet weak var followedByMiddleNode: VMUser!
+    @IBOutlet weak var followedByLeftNode: VMUser!
+    @IBOutlet weak var followedByRightNode: VMUser!
+    
+    
     var theGraph : Graph
     var theAlgorithm : Algorithm?
     
+    let swipeUp : UISwipeGestureRecognizer = UISwipeGestureRecognizer()
     
     let goToSearch : String = "graphToSearch"
     
@@ -55,24 +65,16 @@ class GraphViewController : UIViewController, UISearchBarDelegate
         
         self.searchBar.delegate = self
         
-
+        self.swipeUp.addTarget(self, action: "swipeAction:")
         
-/*
-        if let getTop = theAlgorithm.getUserTopContacts(theGraph.userInFocus)
-        {
-            theGraph.userInFocus.myTopContacts = getTop
-            for eachUser in theGraph.userInFocus.myTopContacts
-            {
-                theGraph.listOfUserNodes.append(UserNode(me: eachUser))
-            }
-            var topContacts : [ Model_User ] = theAlgorithm.theGraph.userInFocus.myTopContacts
-        }
+        self.linkUserViews()
 
-*/
-        self.createUserView( true )
-        self.reloadUserView(self.theGraph.userInFocus.myself, userView: mainUserNode!)
+        self.reloadUserView(self.theGraph.userInFocus.myself, userView: mainUserNode)
         
         self.getContacts(self.theGraph.userInFocus.myself.id)
+        
+        
+        //self.loadUserViews()
         
     }
 
@@ -92,63 +94,54 @@ class GraphViewController : UIViewController, UISearchBarDelegate
     
     }
     
-    func createUserView ( main : Bool )
+  
+    
+    // { 0 : follows , 1 : followedBy , 2 : main }
+    func linkUserViews()
+    {
+        var allNodes : [ VMUser ] = [ mainUserNode, followsMiddleNode, followsLeftNode, followsRightNode,
+                                     followedByMiddleNode, followedByLeftNode, followedByRightNode ]
+        var tagNums : [ Int ] = [ 101, 1011,   102, 1022,   103, 1033,   104, 1044,   105, 1055,   106, 1066,   107, 1077 ]
+        
+        for var i = 0; i < allNodes.count; i++
+        {
+            allNodes[i].imageView = allNodes[i].viewWithTag( tagNums[i * 2] ) as? VMImg
+            allNodes[i].usernameLabel = allNodes[i].viewWithTag( tagNums[(i * 2 + 1)] ) as? VMLabel
+        
+            allNodes[i].setStyle()
+            
+            allNodes[i].imageView?.addGestureRecognizer( swipeUp )
+        }
+        
+    }
+    
+    
+    func loadUserViews( followsONEfollowedTWO : Int )
     {
         
-        var widthHeight : CGFloat = main ? 200 : 160
-  
-        var x : CGFloat  = (relationshipScrollView.bounds.width - widthHeight)/2
-        var y : CGFloat  = (relationshipScrollView.bounds.height - widthHeight)/2
+        var nodes : [ VMUser ]?
+        var models : [ Model_User ]?
+        if(followsONEfollowedTWO == 1)
+        {
+            nodes = [ followsMiddleNode, followsLeftNode, followsRightNode ]
+            
+            models = [  self.theGraph.userInFocus.myTopContacts[contactsFollows]![0],
+                        self.theGraph.userInFocus.myTopContacts[contactsFollows]![1],
+                        self.theGraph.userInFocus.myTopContacts[contactsFollows]![2] ]
+        }
+        else if(followsONEfollowedTWO == 2)
+        {
+            nodes = [ followedByMiddleNode, followedByLeftNode, followedByRightNode ]
+            
+            models = [ self.theGraph.userInFocus.myTopContacts[contactsFollowedBy]![0],
+                       self.theGraph.userInFocus.myTopContacts[contactsFollowedBy]![1],
+                       self.theGraph.userInFocus.myTopContacts[contactsFollowedBy]![2] ]
+        }
         
-        var frame : CGRect = CGRectMake(x, y, widthHeight, widthHeight)
-        mainUserNode = VMUser(frame: frame)
-        
-        x = frame.width / 20
-        var imgWidth : CGFloat = frame.width - (x * 2)
-        
-        mainUserNode!.imageView = UIImageView(frame: CGRectMake( x, 0, imgWidth, imgWidth))
-        mainUserNode!.usernameLabel = UILabel(frame: CGRectMake( x, imgWidth, imgWidth, x * 2))
-        
-        
-        
-        mainUserNode!.addSubview(mainUserNode!.imageView!)
-        mainUserNode!.addSubview(mainUserNode!.usernameLabel!)
-        
-        self.relationshipScrollView.addSubview(mainUserNode!)
-        
-        
-        // to make the UIImageView circular
-        mainUserNode!.imageView!.layer.cornerRadius = mainUserNode!.imageView!.frame.size.height/2
-        mainUserNode!.imageView!.layer.masksToBounds = true
-        mainUserNode!.imageView!.layer.borderColor = UIColor.lightGrayColor().CGColor
-        mainUserNode!.imageView!.layer.borderWidth = 0.7
-        
-        mainUserNode!.usernameLabel!.font = UIFont(name: "Helvetica Neue", size: 16.0)
-        mainUserNode!.usernameLabel!.textAlignment = NSTextAlignment.Center
-        mainUserNode!.usernameLabel!.textColor = UIColor.grayColor()
-        
-        
-        // Add constraints  -->   item1.attribute1 = multiplier × item2.attribute2 + constant
-
-        
-        //  Set width & height of View
-        
-        mainUserNode!.addConstraint(NSLayoutConstraint(item: mainUserNode!, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: 200))
-        
-        mainUserNode!.addConstraint(NSLayoutConstraint(item: mainUserNode!, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: 200))
-        
-        
-        
-        //  Set center of margin with regards to the superview
-        
-        relationshipScrollView.addConstraint(NSLayoutConstraint(item: mainUserNode!, attribute: NSLayoutAttribute.CenterXWithinMargins, relatedBy: NSLayoutRelation.Equal, toItem: relationshipScrollView, attribute: NSLayoutAttribute.CenterXWithinMargins, multiplier: 1.0, constant: 0))
-        
-        relationshipScrollView.addConstraint(NSLayoutConstraint(item: mainUserNode!, attribute: NSLayoutAttribute.CenterYWithinMargins, relatedBy: NSLayoutRelation.Equal, toItem: relationshipScrollView, attribute: NSLayoutAttribute.CenterYWithinMargins, multiplier: 1.0, constant: 0))
-        
-        // --> This is the damn piece I was missing all along! -.-
-        mainUserNode!.setTranslatesAutoresizingMaskIntoConstraints(false)
-        
-        
+        for var i = 0; i < nodes!.count; i++
+        {
+            self.reloadUserView(models![i], userView: nodes![i])
+        }
         
     }
     
@@ -158,9 +151,6 @@ class GraphViewController : UIViewController, UISearchBarDelegate
         var theSession = NSURLSession.sharedSession()
         
         
-        
-
-        
         // Get Image
         
         if let url = NSURL( string: user.profile_picture )
@@ -169,7 +159,7 @@ class GraphViewController : UIViewController, UISearchBarDelegate
                 
                 (data, response, error) -> Void in
                 dispatch_async(dispatch_get_main_queue(),{
-                    self.mainUserNode!.imageView!.image = UIImage(data: data)!
+                    userView.imageView!.image = UIImage(data: data)!
                     
                     UIView.animateWithDuration(1.0, delay: 0.8, options: UIViewAnimationOptions.CurveLinear, animations: {   () -> Void in
                         
@@ -179,11 +169,7 @@ class GraphViewController : UIViewController, UISearchBarDelegate
                         }
                         , completion: {   (done) -> Void in
                             
-                            UIView.animateWithDuration(0.5, animations: {   () -> Void in
-                                
-                                userView.usernameLabel!.font = UIFont(name: "Helvetica Neue Light", size: 15.0)
-                                
-                            })
+                            
                     })
                     
                     return
@@ -200,11 +186,30 @@ class GraphViewController : UIViewController, UISearchBarDelegate
         
     }
 
+    func swipeAction( sender: UISwipeGestureRecognizer )
+    {
+        var theView : UIImageView = sender.view as! UIImageView
+        var ind : Int = (theView.tag % 100) - 2
+        
+        var allContactNodes : [ VMUser ] = [ followsMiddleNode, followsLeftNode, followsRightNode,
+                                             followedByMiddleNode, followedByLeftNode, followedByRightNode ]
+        
+        if( ind < 3 ) //follows
+        {
+            
+            
+        }
+        else          //followed by
+        {
+            
+        }
+        
+    }
+    
     func getContacts( user_id : String )
     {
         self.getFollows(user_id)
         self.getFollowedBys(user_id)
-        
     }
     
     
@@ -236,7 +241,12 @@ class GraphViewController : UIViewController, UISearchBarDelegate
                     self.theGraph.userInFocus.myTopContacts[contactsFollows]?.append(u)
                 }
                 
-                NSLog("Follows : \n\n\(self.theGraph.userInFocus.myTopContacts.count)\n")
+                NSLog("Follows : \n\n\(self.theGraph.userInFocus.myTopContacts[contactsFollows]?.count)\n")
+                
+     //********
+                self.loadUserViews( 1 )
+     //********           
+                
             }).resume()
             
         }
@@ -271,7 +281,15 @@ class GraphViewController : UIViewController, UISearchBarDelegate
                     self.theGraph.userInFocus.myTopContacts[contactsFollowedBy]?.append( u )
                 }
                 
-                NSLog("Followed By : \n\n\(self.theGraph.userInFocus.myTopContacts.count)\n")
+                NSLog("Followed By : \n\n\(self.theGraph.userInFocus.myTopContacts[contactsFollowedBy]?.count)\n")
+                
+                
+    //********
+                self.loadUserViews( 2 )
+    //********
+                
+                
+                
             }).resume()
             
         }
