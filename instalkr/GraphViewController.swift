@@ -39,6 +39,9 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
     var swipeUp : [ UISwipeGestureRecognizer ] = [ UISwipeGestureRecognizer ]()
     var doubleTap : [ UITapGestureRecognizer ] = [ UITapGestureRecognizer ]()
     
+    var results : [ Model_User ]?
+    
+    
     let goToSearch : String = "graphToSearch"
     
     required init(coder aDecoder: NSCoder)
@@ -334,16 +337,62 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
         
         
     }
-
-    // -- Search Bar methods
-    func searchBar( searchBar: UISearchBar, textDidChange searchText: String)
+    
+    func doSearchForUserBeforeSegue( )
     {
+        var theSession =  NSURLSession.sharedSession()
+        var access_token : String = NSUserDefaults.standardUserDefaults().objectForKey(userPrefKeys_accessToken) as! String
+        if let url : NSURL = NSURL( string: Instagram_API.getUserSearch(access_token, query_user_name: self.searchBar.text ) )
+        {
+            theSession.dataTaskWithURL(url, completionHandler: {
+                
+                (data, response, error) -> Void in
+                
+                let jsonData : AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+                
+                self.results = [Model_User]()
+                for eachUser in (jsonData.objectForKey("data") as! NSMutableArray)
+                {
+                    var firstName = ""
+                    if(eachUser.objectForKey("profile_picture") != nil)
+                    {
+                        firstName = eachUser.objectForKey("profile_picture") as! String
+                    }
+                    
+                    var lastName = ""
+                    if(eachUser.objectForKey("last_name") != nil)
+                    {
+                        lastName = eachUser.objectForKey("last_name") as! String
+                    }
+                    
+                    self.results?.append(
+                        Model_User(        id: eachUser.objectForKey("id") as! String,
+                                           username: eachUser.objectForKey("username") as! String,
+                                           profile_picture: eachUser.objectForKey("profile_picture") as! String,
+                                           first_name: firstName,
+                                           last_name: lastName
+                        )
+                    )
+                }
+            
+                
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    self.goToSearchNow()
+                    
+                    return
+                })
+                
+            }).resume()
+        }
         
     }
 
+    // -- Search Bar methods
     func searchBarSearchButtonClicked( searchBar: UISearchBar)
     {
-        self.performSegueWithIdentifier( goToSearch , sender: self)
+        self.doSearchForUserBeforeSegue()
     }
 
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool
@@ -360,13 +409,21 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
         return true
     }
     
+    func goToSearchNow()
+    {
+        self.performSegueWithIdentifier( self.goToSearch , sender: self)
+    }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
     {
         if (segue.identifier == goToSearch )
         {
-            var controller : UIViewController = segue.destinationViewController as! SearchViewController
+            (segue.destinationViewController as! SearchViewController).searchUser = self.searchBar.text
             
+            if let haveResults = self.results
+            {
+                (segue.destinationViewController as! SearchViewController).results = haveResults
+            }
             
         }
     }

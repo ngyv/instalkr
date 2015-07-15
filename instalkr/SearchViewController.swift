@@ -16,10 +16,11 @@ class SearchViewController : UIViewController, UISearchBarDelegate, UISearchCont
     
     @IBOutlet var searchBar : UISearchBar!
     
+    var searchUser : String?
+    var results : [ Model_User ]?
+    
     required init(coder aDecoder: NSCoder)
     {
-        
-        
         super.init(coder: aDecoder)
     }
     
@@ -31,10 +32,22 @@ class SearchViewController : UIViewController, UISearchBarDelegate, UISearchCont
     
     override func viewDidLoad()
     {
-        
         super.viewDidLoad()
         
+        
+        if let searchResult = results
+        {
+            NSLog("\(searchResult.count)")
+        }
     }
+    
+    
+    func doSearchForUser()
+    {
+        
+    }
+    
+    
     
 
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool

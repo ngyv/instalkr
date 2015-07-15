@@ -505,7 +505,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4BE-39-kMi" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="up" id="pXK-cE-JLd"/>
             </objects>
             <point key="canvasLocation" x="1114" y="1153"/>
         </scene>
@@ -535,7 +534,7 @@
         <image name="incognito" width="598" height="300"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4IQ-NG-yO8"/>
         <segue reference="JF8-of-CX9"/>
+        <segue reference="N8W-hh-BBm"/>
     </inferredMetricsTieBreakers>
 </document>
