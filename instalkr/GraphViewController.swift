@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class GraphViewController : UIViewController, UISearchBarDelegate
+class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureRecognizerDelegate
 {
     
     @IBOutlet weak var relationshipScrollView: UIScrollView!
@@ -33,7 +33,11 @@ class GraphViewController : UIViewController, UISearchBarDelegate
     var theGraph : Graph
     var theAlgorithm : Algorithm?
     
-    let swipeUp : UISwipeGestureRecognizer = UISwipeGestureRecognizer()
+    var lastFollowsIndex : Int = -1
+    var lastFollowedByIndex : Int = -1
+    
+    var swipeUp : [ UISwipeGestureRecognizer ] = [ UISwipeGestureRecognizer ]()
+    var doubleTap : [ UITapGestureRecognizer ] = [ UITapGestureRecognizer ]()
     
     let goToSearch : String = "graphToSearch"
     
@@ -65,7 +69,7 @@ class GraphViewController : UIViewController, UISearchBarDelegate
         
         self.searchBar.delegate = self
         
-        self.swipeUp.addTarget(self, action: "swipeAction:")
+        self.initGestureRecognizers()
         
         self.linkUserViews()
 
@@ -94,7 +98,17 @@ class GraphViewController : UIViewController, UISearchBarDelegate
     
     }
     
-  
+    func initGestureRecognizers()
+    {
+        for var i = 0; i < 6; i++
+        {
+            var newGestureRecognizer  = UITapGestureRecognizer()
+            newGestureRecognizer.numberOfTapsRequired = 2
+            newGestureRecognizer.addTarget(self, action: "tapAction:")
+            
+            self.doubleTap.append( newGestureRecognizer )
+        }
+    }
     
     // { 0 : follows , 1 : followedBy , 2 : main }
     func linkUserViews()
@@ -110,7 +124,10 @@ class GraphViewController : UIViewController, UISearchBarDelegate
         
             allNodes[i].setStyle()
             
-            allNodes[i].imageView?.addGestureRecognizer( swipeUp )
+            if(i != 0)
+            {
+                allNodes[i].imageView?.addGestureRecognizer( doubleTap[i-1] )
+            }
         }
         
     }
@@ -185,25 +202,44 @@ class GraphViewController : UIViewController, UISearchBarDelegate
         
         
     }
-
-    func swipeAction( sender: UISwipeGestureRecognizer )
+    
+    func tapAction( sender : UITapGestureRecognizer )
     {
         var theView : UIImageView = sender.view as! UIImageView
         var ind : Int = (theView.tag % 100) - 2
         
-        var allContactNodes : [ VMUser ] = [ followsMiddleNode, followsLeftNode, followsRightNode,
-                                             followedByMiddleNode, followedByLeftNode, followedByRightNode ]
+        self.replacePic(ind )
         
-        if( ind < 3 ) //follows
+    }
+    
+
+    func swipeAction( sender: UISwipeGestureRecognizer )
+    {
+    
+        var theView : UIImageView = sender.view as! UIImageView
+        var ind : Int = (theView.tag % 100) - 2
+        
+        self.replacePic(ind )
+        
+    }
+    
+    
+    func replacePic( index : Int )
+    {
+        var allContactNodes : [ VMUser ] = [ followsMiddleNode, followsLeftNode, followsRightNode,
+            followedByMiddleNode, followedByLeftNode, followedByRightNode ]
+        
+        if( index < 3 ) //follows
         {
-            
-            
+            self.lastFollowsIndex++
+            self.reloadUserView(self.theGraph.userInFocus.myTopContacts[contactsFollows]![self.lastFollowsIndex], userView: allContactNodes[index])
         }
         else          //followed by
         {
+            self.lastFollowedByIndex++
+            self.reloadUserView(self.theGraph.userInFocus.myTopContacts[contactsFollowedBy]![self.lastFollowedByIndex], userView: allContactNodes[index])
             
         }
-        
     }
     
     func getContacts( user_id : String )
@@ -247,6 +283,8 @@ class GraphViewController : UIViewController, UISearchBarDelegate
                 self.loadUserViews( 1 )
      //********           
                 
+                self.lastFollowsIndex = 2
+                
             }).resume()
             
         }
@@ -288,7 +326,7 @@ class GraphViewController : UIViewController, UISearchBarDelegate
                 self.loadUserViews( 2 )
     //********
                 
-                
+                self.lastFollowedByIndex = 2
                 
             }).resume()
             
@@ -321,7 +359,6 @@ class GraphViewController : UIViewController, UISearchBarDelegate
         
         return true
     }
-
     
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)

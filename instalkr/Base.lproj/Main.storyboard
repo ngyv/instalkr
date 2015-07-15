@@ -266,7 +266,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrP-XL-hot" userLabel="Follows (M)" customClass="VMUser" customModule="instalkr" customModuleProvider="target">
                                         <rect key="frame" x="234" y="70" width="100" height="100"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" tag="102" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z40-HC-JL9" customClass="VMImg" customModule="instalkr" customModuleProvider="target">
+                                            <imageView multipleTouchEnabled="YES" tag="102" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z40-HC-JL9" customClass="VMImg" customModule="instalkr" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="90" id="Uhy-1U-2kH"/>
@@ -297,7 +297,7 @@
                                     <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="941-2T-4dS" userLabel="Follows (L)" customClass="VMUser" customModule="instalkr" customModuleProvider="target">
                                         <rect key="frame" x="67" y="70" width="100" height="100"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" tag="103" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DpJ-GL-8ql" customClass="VMImg" customModule="instalkr" customModuleProvider="target">
+                                            <imageView multipleTouchEnabled="YES" tag="103" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DpJ-GL-8ql" customClass="VMImg" customModule="instalkr" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="90" id="oC3-Uz-aV7"/>
@@ -328,7 +328,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EMJ-r5-AYm" userLabel="Follows (R)" customClass="VMUser" customModule="instalkr" customModuleProvider="target">
                                         <rect key="frame" x="355" y="70" width="100" height="100"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" tag="104" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IQK-hK-ZMg" customClass="VMImg" customModule="instalkr" customModuleProvider="target">
+                                            <imageView multipleTouchEnabled="YES" tag="104" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IQK-hK-ZMg" customClass="VMImg" customModule="instalkr" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="90" id="ryV-li-nC7"/>
@@ -359,7 +359,7 @@
                                     <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OBE-cX-QHr" userLabel="Followed By (L)" customClass="VMUser" customModule="instalkr" customModuleProvider="target">
                                         <rect key="frame" x="67" y="454" width="100" height="100"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" tag="106" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v8e-bq-cvm" customClass="VMImg" customModule="instalkr" customModuleProvider="target">
+                                            <imageView multipleTouchEnabled="YES" tag="106" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v8e-bq-cvm" customClass="VMImg" customModule="instalkr" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="90" id="72G-IR-gmi"/>
@@ -390,7 +390,7 @@
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rPH-44-0Ue" userLabel="Followed By (R)" customClass="VMUser" customModule="instalkr" customModuleProvider="target">
                                         <rect key="frame" x="369" y="454" width="100" height="100"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" tag="107" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o0i-tj-ckq" customClass="VMImg" customModule="instalkr" customModuleProvider="target">
+                                            <imageView multipleTouchEnabled="YES" tag="107" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o0i-tj-ckq" customClass="VMImg" customModule="instalkr" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="90" id="MZr-YJ-HIY"/>
@@ -421,7 +421,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P69-wf-IY4" userLabel="Followed By (M)" customClass="VMUser" customModule="instalkr" customModuleProvider="target">
                                         <rect key="frame" x="234" y="428" width="100" height="100"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" tag="105" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Jv-62-1gU" customClass="VMImg" customModule="instalkr" customModuleProvider="target">
+                                            <imageView multipleTouchEnabled="YES" tag="105" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Jv-62-1gU" customClass="VMImg" customModule="instalkr" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="90" id="7Zf-LK-1Xd"/>
