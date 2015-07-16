@@ -210,9 +210,16 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
     {
         var theView : UIImageView = sender.view as! UIImageView
         var ind : Int = (theView.tag % 100) - 2
+        var check :  String = ind < 3  ? contactsFollows : contactsFollowedBy
         
-        self.replacePic(ind )
-        
+        if(self.theGraph.userInFocus.myTopContacts[check]?.count > 3)
+        {
+            self.replacePic(ind )
+        }
+        else
+        {
+            self.getContacts(self.theGraph.userInFocus.myself.id)
+        }
     }
     
 
@@ -221,9 +228,16 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
     
         var theView : UIImageView = sender.view as! UIImageView
         var ind : Int = (theView.tag % 100) - 2
+        var check :  String = ind < 3  ? contactsFollows : contactsFollowedBy
         
-        self.replacePic(ind )
-        
+        if(self.theGraph.userInFocus.myTopContacts[check]?.count > 3)
+        {
+            self.replacePic(ind )
+        }
+        else
+        {
+            self.getContacts(self.theGraph.userInFocus.myself.id)
+        }
     }
     
     
@@ -232,17 +246,17 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
         var allContactNodes : [ VMUser ] = [ followsMiddleNode, followsLeftNode, followsRightNode,
             followedByMiddleNode, followedByLeftNode, followedByRightNode ]
         
-        if( index < 3 ) //follows
+        var getContacts : String = index < 3 ? contactsFollows : contactsFollowedBy
+        if(self.lastFollowsIndex < self.theGraph.userInFocus.myTopContacts[getContacts]?.count)
         {
             self.lastFollowsIndex++
-            self.reloadUserView(self.theGraph.userInFocus.myTopContacts[contactsFollows]![self.lastFollowsIndex], userView: allContactNodes[index])
         }
-        else          //followed by
+        else
         {
-            self.lastFollowedByIndex++
-            self.reloadUserView(self.theGraph.userInFocus.myTopContacts[contactsFollowedBy]![self.lastFollowedByIndex], userView: allContactNodes[index])
-            
+            self.lastFollowedByIndex = 0
         }
+        
+        self.reloadUserView(self.theGraph.userInFocus.myTopContacts[getContacts]![self.lastFollowsIndex], userView: allContactNodes[index])
     }
     
     func getContacts( user_id : String )
@@ -354,9 +368,9 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
                 for eachUser in (jsonData.objectForKey("data") as! NSMutableArray)
                 {
                     var firstName = ""
-                    if(eachUser.objectForKey("profile_picture") != nil)
+                    if(eachUser.objectForKey("first_name") != nil)
                     {
-                        firstName = eachUser.objectForKey("profile_picture") as! String
+                        firstName = eachUser.objectForKey("first_name") as! String
                     }
                     
                     var lastName = ""

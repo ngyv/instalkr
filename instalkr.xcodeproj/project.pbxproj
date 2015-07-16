@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DC582A221B43872300D06DB5 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC582A211B43872300D06DB5 /* Graph.swift */; };
 		DC582A241B438FAF00D06DB5 /* Algorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC582A231B438FAF00D06DB5 /* Algorithm.swift */; };
+		DC5D4B8F1B57597B0044945A /* ViewModel_UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5D4B8E1B57597B0044945A /* ViewModel_UserCell.swift */; };
 		DC5E77361B423F9A00E69BF5 /* Instagram_API.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5E77351B423F9A00E69BF5 /* Instagram_API.swift */; };
 		DC5FC2071B468F2D00EFDE5C /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5FC2061B468F2D00EFDE5C /* GraphViewController.swift */; };
 		DC783E1D1B3EDB0900BB1FA7 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC783E1C1B3EDB0900BB1FA7 /* LogInViewController.swift */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		DC582A211B43872300D06DB5 /* Graph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		DC582A231B438FAF00D06DB5 /* Algorithm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Algorithm.swift; sourceTree = "<group>"; };
+		DC5D4B8E1B57597B0044945A /* ViewModel_UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel_UserCell.swift; sourceTree = "<group>"; };
 		DC5E77351B423F9A00E69BF5 /* Instagram_API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instagram_API.swift; sourceTree = "<group>"; };
 		DC5FC2061B468F2D00EFDE5C /* GraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 		DC783E1C1B3EDB0900BB1FA7 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				DC7B53B31B4523D000074FF8 /* ViewModel_User.swift */,
+				DC5D4B8E1B57597B0044945A /* ViewModel_UserCell.swift */,
 			);
 			name = "View Model";
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 			files = (
 				DCF32C3C1B3D4BD600B2AF0E /* Model_Media.swift in Sources */,
 				DC783E1F1B3EDB1700BB1FA7 /* SearchViewController.swift in Sources */,
+				DC5D4B8F1B57597B0044945A /* ViewModel_UserCell.swift in Sources */,
 				DC783E1D1B3EDB0900BB1FA7 /* LogInViewController.swift in Sources */,
 				DC582A221B43872300D06DB5 /* Graph.swift in Sources */,
 				DCF32C1A1B3D482100B2AF0E /* WelcomeViewController.swift in Sources */,

@@ -145,16 +145,73 @@
                                     <outlet property="delegate" destination="msK-AK-an5" id="2Te-as-bdO"/>
                                 </connections>
                             </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="sb7-ux-t4z">
+                                <rect key="frame" x="16" y="64" width="552" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="53" id="u6W-0L-36U" customClass="VMCellUser" customModule="instalkr" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="568" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u6W-0L-36U" id="5oO-mk-7Mw">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4zS-L9-uiE" customClass="VMCellImg" customModule="instalkr" customModuleProvider="target">
+                                                    <rect key="frame" x="52" y="1" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="82O-rL-th9"/>
+                                                        <constraint firstAttribute="height" constant="50" id="SR4-ul-rIX"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WjM-hL-kaK" customClass="VMCellLabel" customModule="instalkr" customModuleProvider="target">
+                                                    <rect key="frame" x="150" y="15" width="140" height="21"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.83000000000000007" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Full Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fba-zZ-0le" customClass="VMCellLabel" customModule="instalkr" customModuleProvider="target">
+                                                    <rect key="frame" x="363" y="15" width="94" height="21"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="4zS-L9-uiE" secondAttribute="centerY" constant="1" id="7mO-xr-bDn"/>
+                                                <constraint firstItem="fba-zZ-0le" firstAttribute="leading" secondItem="WjM-hL-kaK" secondAttribute="trailing" constant="21" id="GtR-Yg-Uql"/>
+                                                <constraint firstAttribute="centerY" secondItem="WjM-hL-kaK" secondAttribute="centerY" constant="0.5" id="SAg-aH-JO4"/>
+                                                <constraint firstItem="4zS-L9-uiE" firstAttribute="leading" secondItem="5oO-mk-7Mw" secondAttribute="leadingMargin" constant="2" id="Yhg-7j-HVj"/>
+                                                <constraint firstAttribute="centerY" secondItem="fba-zZ-0le" secondAttribute="centerY" constant="0.5" id="ah2-B7-RDa"/>
+                                                <constraint firstItem="WjM-hL-kaK" firstAttribute="leading" secondItem="4zS-L9-uiE" secondAttribute="trailing" constant="16" id="ewl-Dv-sIg"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="fullNameLabel" destination="fba-zZ-0le" id="aea-YB-z7a"/>
+                                            <outlet property="userImg" destination="4zS-L9-uiE" id="gug-mQ-3EM"/>
+                                            <outlet property="usernameLabel" destination="WjM-hL-kaK" id="LwH-CA-1bw"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="msK-AK-an5" id="Xw7-6L-ggt"/>
+                                    <outlet property="delegate" destination="msK-AK-an5" id="na1-WK-e0V"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="vW4-gw-VE1" secondAttribute="trailing" id="0Nk-3D-NCy"/>
+                            <constraint firstItem="5Jb-6k-zh5" firstAttribute="top" secondItem="sb7-ux-t4z" secondAttribute="bottom" id="KUv-7J-Xpa"/>
+                            <constraint firstItem="sb7-ux-t4z" firstAttribute="leading" secondItem="Iu2-ej-3ph" secondAttribute="leadingMargin" id="W0q-Sa-I1O"/>
                             <constraint firstItem="vW4-gw-VE1" firstAttribute="top" secondItem="Iu2-ej-3ph" secondAttribute="topMargin" constant="20" id="Z0j-ED-XCa"/>
+                            <constraint firstItem="sb7-ux-t4z" firstAttribute="trailing" secondItem="Iu2-ej-3ph" secondAttribute="trailingMargin" constant="-16" id="k4q-xN-f5Q"/>
                             <constraint firstItem="vW4-gw-VE1" firstAttribute="leading" secondItem="Iu2-ej-3ph" secondAttribute="leadingMargin" id="x7k-23-56h"/>
+                            <constraint firstItem="sb7-ux-t4z" firstAttribute="top" secondItem="vW4-gw-VE1" secondAttribute="bottom" id="ylk-1y-mp6"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="searchBar" destination="vW4-gw-VE1" id="3TK-1V-I1S"/>
                         <outlet property="searchDisplayController" destination="IK5-tv-lBk" id="EVi-7g-JLF"/>
+                        <outlet property="userTableView" destination="sb7-ux-t4z" id="ahg-J6-Ahv"/>
                         <segue destination="C4D-gl-qTs" kind="presentation" identifier="searchToGraph" id="N8W-hh-BBm"/>
                     </connections>
                 </viewController>
@@ -162,7 +219,6 @@
                 <searchDisplayController id="IK5-tv-lBk">
                     <connections>
                         <outlet property="delegate" destination="msK-AK-an5" id="g2x-EY-9wv"/>
-                        <outlet property="searchBar" destination="vW4-gw-VE1" id="KfE-G1-rD0"/>
                         <outlet property="searchContentsController" destination="msK-AK-an5" id="38v-7a-a3W"/>
                         <outlet property="searchResultsDataSource" destination="msK-AK-an5" id="3ow-p4-FVx"/>
                         <outlet property="searchResultsDelegate" destination="msK-AK-an5" id="f6f-vm-1Ry"/>
@@ -186,8 +242,8 @@
                             <view clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8HC-Ug-Oub" userLabel="Search Bar View">
                                 <rect key="frame" x="16" y="20" width="568" height="45"/>
                                 <subviews>
-                                    <searchBar multipleTouchEnabled="YES" contentMode="redraw" placeholder="Search for user" translatesAutoresizingMaskIntoConstraints="NO" id="gn9-w4-ytz">
-                                        <rect key="frame" x="0.0" y="1" width="568" height="44"/>
+                                    <searchBar multipleTouchEnabled="YES" contentMode="redraw" misplaced="YES" placeholder="Search for user" translatesAutoresizingMaskIntoConstraints="NO" id="gn9-w4-ytz">
+                                        <rect key="frame" x="0.0" y="29" width="568" height="44"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="barTintColor">
