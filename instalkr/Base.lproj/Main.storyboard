@@ -24,7 +24,7 @@
                                     <constraint firstAttribute="width" constant="368" id="Z8Q-TE-6cE"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xtQ-SG-xbN">
+                            <button opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xtQ-SG-xbN">
                                 <rect key="frame" x="180" y="424" width="240" height="45"/>
                                 <color key="backgroundColor" red="0.70349069784315765" green="0.89143386994949492" blue="0.88243450059010364" alpha="0.35000000000000003" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="16"/>
@@ -40,6 +40,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="clickToSearch" destination="BYZ-38-t0r" eventType="touchUpInside" id="HoW-SA-lIo"/>
                                     <segue destination="msK-AK-an5" kind="presentation" identifier="welcomeToSearch" id="bAN-KW-fTw"/>
                                 </connections>
                             </button>
@@ -48,7 +49,7 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="26"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hXC-dR-0gO">
+                            <button multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hXC-dR-0gO">
                                 <rect key="frame" x="180" y="355" width="240" height="45"/>
                                 <color key="backgroundColor" red="0.91607952146678095" green="0.91481708613364099" blue="0.93686868686868685" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -68,7 +69,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="rAE-TX-o0j" kind="presentation" identifier="welcomeToLogIn" id="eNJ-7c-RQ5"/>
+                                    <action selector="clickToLogIn" destination="BYZ-38-t0r" eventType="touchUpInside" id="bc1-HK-Tfu"/>
+                                    <segue destination="rAE-TX-o0j" kind="presentation" identifier="welcomeToLogIn" id="tzI-Sm-YTf"/>
                                 </connections>
                             </button>
                         </subviews>

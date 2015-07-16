@@ -93,6 +93,17 @@ class WelcomeViewController : UIViewController {
         
     }
     
+    @IBAction func clickToLogIn()
+    {
+        self.performSegueWithIdentifier(goToLogIn, sender: self)
+    }
+    
+    @IBAction func clickToSearch()
+    {
+        self.performSegueWithIdentifier(goToSearch, sender: self)
+    }
+    
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()

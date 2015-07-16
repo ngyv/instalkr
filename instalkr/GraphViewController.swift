@@ -352,7 +352,7 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
         
     }
     
-    func doSearchForUserBeforeSegue( )
+    func doSearchForUserBeforeSegue()
     {
         var theSession =  NSURLSession.sharedSession()
         var access_token : String = NSUserDefaults.standardUserDefaults().objectForKey(userPrefKeys_accessToken) as! String

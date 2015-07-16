@@ -26,8 +26,8 @@ class VMCellUser : UITableViewCell
     func setStyle()
     {
         self.userImg!.setStyle()
-        self.usernameLabel!.setStyle(1)
-        self.fullNameLabel!.setStyle(2)
+        //self.usernameLabel!.setStyle(1)
+        //self.fullNameLabel!.setStyle(2)
     }
     
 }
@@ -47,7 +47,7 @@ class VMCellImg : UIImageView
     func setStyle()
     {
         self.contentMode = UIViewContentMode.ScaleAspectFit
-        self.clipsToBounds = true
+        self.clipsToBounds = true   // otherwise it will spill over
         
         self.layer.cornerRadius = self.frame.size.width * 0.1
         self.layer.masksToBounds = true
