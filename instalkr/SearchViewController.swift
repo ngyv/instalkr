@@ -18,6 +18,7 @@ class SearchViewController : UIViewController, UISearchBarDelegate, UISearchCont
     @IBOutlet var userTableView : UITableView!
     var searchUser : String?
     var results : [ Model_User ]?
+    var userSelected : Model_User?
     
     required init(coder aDecoder: NSCoder)
     {
@@ -172,6 +173,25 @@ class SearchViewController : UIViewController, UISearchBarDelegate, UISearchCont
         
         return cell
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        self.userSelected = self.results![indexPath.row]
         
+        self.goToGraphNow()
+    }
+    
+    func goToGraphNow()
+    {
+        self.performSegueWithIdentifier(goToGraph, sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if(segue.identifier == goToGraph)
+        {
+            (segue.destinationViewController as! GraphViewController).searchedUser = self.userSelected!
+        }
+    }
        
 }

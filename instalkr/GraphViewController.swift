@@ -33,6 +33,8 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
     var theGraph : Graph
     var theAlgorithm : Algorithm?
     
+    var searchedUser : Model_User?
+    
     var lastFollowsIndex : Int = -1
     var lastFollowedByIndex : Int = -1
     
@@ -52,9 +54,11 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
         var userPref = NSUserDefaults.standardUserDefaults()
         
         var mainUser : UserNode = UserNode(me: Model_User.createMUser(userPref.objectForKey(userPrefKeys_user)!))
-            
+        
         self.theGraph = Graph(theMainUser: mainUser)
-            
+        
+        
+        
   //      self.theAlgorithm = Algorithm_PopularContacts(someGraph: theGraph)
 
         super.init(coder: aDecoder)
@@ -62,6 +66,7 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
     
     override func viewWillAppear(animated: Bool)
     {
+
         super.viewWillAppear(animated)
     }
     
@@ -69,6 +74,12 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
     {
  
         super.viewDidLoad()
+        
+        if let haveSearchedUser = searchedUser
+        {
+            self.theGraph = Graph(theMainUser: UserNode(me: haveSearchedUser))
+            
+        }
         
         self.searchBar.delegate = self
         
