@@ -40,6 +40,10 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
     
     var swipeUp : [ UISwipeGestureRecognizer ] = [ UISwipeGestureRecognizer ]()
     var doubleTap : [ UITapGestureRecognizer ] = [ UITapGestureRecognizer ]()
+    var longPress : [UILongPressGestureRecognizer ] = [ UILongPressGestureRecognizer ]()
+    
+    var userViewPressed : VMUser?
+    var panGR : UIPanGestureRecognizer?
     
     var results : [ Model_User ]?
     
@@ -75,21 +79,7 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
  
         super.viewDidLoad()
         
-        if let haveSearchedUser = searchedUser
-        {
-            self.theGraph = Graph(theMainUser: UserNode(me: haveSearchedUser))
-            
-        }
-        
-        self.searchBar.delegate = self
-        
-        self.initGestureRecognizers()
-        
-        self.linkUserViews()
-
-        self.reloadUserView(self.theGraph.userInFocus.myself, userView: mainUserNode)
-        
-        self.getContacts(self.theGraph.userInFocus.myself.id)
+        self.reloadViews()
         
         
         //self.loadUserViews()
@@ -112,15 +102,45 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
     
     }
     
+    func reloadViews()
+    {
+        if let haveSearchedUser = searchedUser
+        {
+            self.theGraph = Graph(theMainUser: UserNode(me: haveSearchedUser))
+        }
+        
+        self.searchBar.delegate = self
+        
+        self.initGestureRecognizers()
+        
+        self.linkUserViews()
+        
+        self.reloadUserView(self.theGraph.userInFocus.myself, userView: mainUserNode)
+        
+        self.getContacts(self.theGraph.userInFocus.myself.id)
+    }
+    
+    
     func initGestureRecognizers()
     {
         for var i = 0; i < 6; i++
         {
-            var newGestureRecognizer  = UITapGestureRecognizer()
-            newGestureRecognizer.numberOfTapsRequired = 2
-            newGestureRecognizer.addTarget(self, action: "tapAction:")
+            // Double Tap
+            var newTapGestureRecognizer  = UITapGestureRecognizer()
+            newTapGestureRecognizer.numberOfTapsRequired = 2
+            newTapGestureRecognizer.addTarget(self, action: "tapAction:")
             
-            self.doubleTap.append( newGestureRecognizer )
+            self.doubleTap.append( newTapGestureRecognizer )
+            
+            
+            
+            // Long Press
+            var newLongPressGestureRecognizer = UILongPressGestureRecognizer()
+            newLongPressGestureRecognizer.addTarget(self, action: "longPressAction:")
+            
+            self.longPress.append( newLongPressGestureRecognizer )
+            
+            
         }
     }
     
@@ -141,6 +161,8 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
             if(i != 0)
             {
                 allNodes[i].imageView?.addGestureRecognizer( doubleTap[i-1] )
+                
+                allNodes[i].addGestureRecognizer( longPress[i-1] )
             }
         }
         
@@ -233,7 +255,83 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
         }
     }
     
+    func longPressAction( sender : UILongPressGestureRecognizer )
+    {
+        var theView : VMUser = sender.view as! VMUser
+        
+        if(theView.selected == 0)
+        {
+            self.userViewPressed = theView
+        
+            // Handle the dragging
+            self.panGR =  UIPanGestureRecognizer()
+            self.panGR!.addTarget( self, action: "panAction:" )
+            theView.addGestureRecognizer( self.panGR! )
+            
+            self.shakeView( theView )
+        }
+        else
+        {
+        
+            if(theView.selected > 1 )
+            {
+                
+                if(self.panGR != nil)
+                {
+                    
+                    theView.removeGestureRecognizer(self.panGR!)
+                
+                    self.panGR = nil
+                }
+                else
+                {
+                    /*
+                    CGRect boundsA = [viewA convertRect:viewA.bounds toView:nil];
+                    CGRect boundsB = [viewB convertRect:viewB.bounds toView:nil];
+                    Boolean viewsOverlap = CGRectIntersectsRect(boundsA, boundsB);
 
+
+*/
+                }
+            }
+            
+            
+            
+        }
+        
+        theView.selected++
+    }
+    
+    func panAction( sender : UIPanGestureRecognizer )
+    {
+        var theView : VMUser = sender.view as! VMUser
+        
+        var translation : CGPoint = sender.translationInView( theView.superview! )
+        
+        
+        UIView.animateWithDuration(0.25, animations: {
+            
+            ()-> Void in
+            
+            theView.frame = CGRectMake(translation.x, translation.y, theView.frame.size.width, theView.frame.size.height)
+        
+        })
+        
+        var boundsMoving = theView.convertRect(theView.bounds, toView: nil)
+        var mainUserView = self.mainUserNode.convertRect(self.mainUserNode.bounds, toView: nil)
+        if(CGRectIntersectsRect(boundsMoving, mainUserView))
+        {
+            var ind : Int = (theView.tag % 100) - 2
+ //           self.searchedUser = theView
+            
+            
+ //----->>  Use self.reloadViews() and replace self.searchedUser with the Model_User you picked
+            
+            
+            
+        }
+    }
+    
     func swipeAction( sender: UISwipeGestureRecognizer )
     {
     
@@ -251,7 +349,7 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
         }
     }
     
-    
+
     func replacePic( index : Int )
     {
         var allContactNodes : [ VMUser ] = [ followsMiddleNode, followsLeftNode, followsRightNode,
@@ -269,6 +367,19 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
         
         self.reloadUserView(self.theGraph.userInFocus.myTopContacts[getContacts]![self.lastFollowsIndex], userView: allContactNodes[index])
     }
+    
+    
+    func shakeView( theView : UIView )
+    {
+        
+        var animate : CAKeyframeAnimation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+        animate.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animate.duration = 0.4
+        animate.values = [ -4, 4, -4, 4, -3, 3, -1, 1, 0 ]
+        theView.layer.addAnimation(animate, forKey: "shakeView")
+    }
+    
+    
     
     func getContacts( user_id : String )
     {
@@ -433,6 +544,10 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
         
         return true
     }
+    
+
+    
+    
     
     func goToSearchNow()
     {

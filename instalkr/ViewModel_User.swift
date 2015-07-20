@@ -11,17 +11,22 @@ import UIKit
 
 class VMUser : UIView
 {
+    var selected : Int = 0
+    var translation :  CGPoint?
     var imageView : VMImg?
     var usernameLabel : VMLabel?
     
     required init(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
+        
     }
     
     override init(frame: CGRect)
     {
        super.init(frame: frame)
+        
+        
     }
     
     func setStyle()
