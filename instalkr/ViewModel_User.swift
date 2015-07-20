@@ -11,8 +11,9 @@ import UIKit
 
 class VMUser : UIView
 {
+    var userModel : Model_User?
+    var originalFrame : CGRect?
     var selected : Int = 0
-    var translation :  CGPoint?
     var imageView : VMImg?
     var usernameLabel : VMLabel?
     
@@ -25,12 +26,11 @@ class VMUser : UIView
     override init(frame: CGRect)
     {
        super.init(frame: frame)
-        
-        
     }
     
     func setStyle()
     {
+        self.originalFrame = self.frame
         self.layer.cornerRadius = self.frame.size.width * 0.1
         self.layer.borderColor = UIColor.lightTextColor().CGColor
         self.layer.borderWidth = 0.3

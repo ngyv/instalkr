@@ -79,7 +79,7 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
  
         super.viewDidLoad()
         
-        self.reloadViews()
+        self.refreshViews()
         
         
         //self.loadUserViews()
@@ -102,7 +102,7 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
     
     }
     
-    func reloadViews()
+    func refreshViews()
     {
         if let haveSearchedUser = searchedUser
         {
@@ -115,9 +115,10 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
         
         self.linkUserViews()
         
+        self.getContacts(self.theGraph.userInFocus.myself.id)
+        
         self.reloadUserView(self.theGraph.userInFocus.myself, userView: mainUserNode)
         
-        self.getContacts(self.theGraph.userInFocus.myself.id)
     }
     
     
@@ -202,7 +203,7 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
     func reloadUserView( user : Model_User, userView : VMUser )
     {
         var theSession = NSURLSession.sharedSession()
-        
+        userView.userModel = user
         
         // Get Image
         
@@ -275,24 +276,19 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
         
             if(theView.selected > 1 )
             {
+                theView.frame = CGRectMake(5, 5, 90, 90)
+                //if(self.panGR != nil)
+                //{
+                    //theView.removeGestureRecognizer(self.panGR!)
                 
-                if(self.panGR != nil)
-                {
+                    //self.panGR = nil
+                //}
+                //else
+                //{
                     
-                    theView.removeGestureRecognizer(self.panGR!)
-                
-                    self.panGR = nil
-                }
-                else
-                {
-                    /*
-                    CGRect boundsA = [viewA convertRect:viewA.bounds toView:nil];
-                    CGRect boundsB = [viewB convertRect:viewB.bounds toView:nil];
-                    Boolean viewsOverlap = CGRectIntersectsRect(boundsA, boundsB);
-
-
-*/
-                }
+                    
+//--->>
+                //}
             }
             
             
@@ -306,6 +302,8 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
     {
         var theView : VMUser = sender.view as! VMUser
         
+        var theImg : VMImg = theView.imageView!
+        
         var translation : CGPoint = sender.translationInView( theView.superview! )
         
         
@@ -313,25 +311,45 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
             
             ()-> Void in
             
-            theView.frame = CGRectMake(translation.x, translation.y, theView.frame.size.width, theView.frame.size.height)
+            //theView.frame = CGRectMake(translation.x, translation.y, theView.frame.size.width, theView.frame.size.height)
         
+            theImg.frame = CGRectMake(translation.x, translation.y, theImg.frame.size.width, theImg.frame.size.height)
         })
         
-        var boundsMoving = theView.convertRect(theView.bounds, toView: nil)
+        //var boundsMoving = theView.convertRect(theView.bounds, toView: nil)
+        var imgMoving = theImg.convertRect(theImg.bounds, toView: nil)
         var mainUserView = self.mainUserNode.convertRect(self.mainUserNode.bounds, toView: nil)
-        if(CGRectIntersectsRect(boundsMoving, mainUserView))
+        
+        //var areaOfIntersection = CGRectIntersection(boundsMoving, mainUserView)
+        var areaOfIntersection = CGRectIntersection(imgMoving, mainUserView)
+        //if(areaOfIntersection.size.width > theView.frame.size.width/2 || areaOfIntersection.size.height > theView.frame.size.height/2)
+        if(areaOfIntersection.size.width > theImg.frame.size.width/2 || areaOfIntersection.size.height > theImg.frame.size.height/2)
         {
-            var ind : Int = (theView.tag % 100) - 2
- //           self.searchedUser = theView
+            var ind : Int = (theView.tag % 10) - 2
+            
+            var goBack  = CGRectMake(theView.originalFrame!.origin.x, theView.originalFrame!.origin.y, theView.originalFrame!.size.width, theView.originalFrame!.size.height)
+            
+            UIView.animateWithDuration(0.1, animations: {
+                
+                ()-> Void in
+                
+                //theView.frame = goBack
+                theImg.frame = CGRectMake(5, 5, 90, 90)
+            })
             
             
- //----->>  Use self.reloadViews() and replace self.searchedUser with the Model_User you picked
+ //----->>  Use self.refreshViews() and replace self.searchedUser with the Model_User you picked
+            var allContactNodes : [ VMUser ] = [ followsMiddleNode, followsLeftNode, followsRightNode,
+                followedByMiddleNode, followedByLeftNode, followedByRightNode ]
             
+            self.searchedUser = allContactNodes[ind].userModel
+            self.refreshViews()
             
             
         }
     }
     
+
     func swipeAction( sender: UISwipeGestureRecognizer )
     {
     
@@ -403,6 +421,7 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
                 
                 let jsonData: AnyObject = NSJSONSerialization.JSONObjectWithData( data, options: NSJSONReadingOptions.MutableContainers, error: nil )!
                 
+//-->> Check meta first
                 var array : NSMutableArray = jsonData.objectForKey("data")! as! NSMutableArray
                 
                 for eachUser in array
