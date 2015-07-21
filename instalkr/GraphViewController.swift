@@ -194,49 +194,66 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
         
         for var i = 0; i < nodes!.count; i++
         {
-            self.reloadUserView(models![i], userView: nodes![i])
+            self.reloadUserView(models?[i], userView: nodes![i])
         }
         
     }
     
     
-    func reloadUserView( user : Model_User, userView : VMUser )
+    func reloadUserView( user : Model_User?, userView : VMUser )
     {
-        var theSession = NSURLSession.sharedSession()
-        userView.userModel = user
-        
-        // Get Image
-        
-        if let url = NSURL( string: user.profile_picture )
+        if let userAvail = user
         {
-            var task : NSURLSessionDataTask =  theSession.dataTaskWithURL(url, completionHandler: {
-                
-                (data, response, error) -> Void in
-                dispatch_async(dispatch_get_main_queue(),{
-                    userView.imageView!.image = UIImage(data: data)!
-                    
-                    UIView.animateWithDuration(1.0, delay: 0.8, options: UIViewAnimationOptions.CurveLinear, animations: {   () -> Void in
-                        
-                        userView.usernameLabel!.text = user.username
-                        userView.usernameLabel!.alpha = 1.0
-                        
-                        }
-                        , completion: {   (done) -> Void in
-                            
-                            
-                    })
-                    
-                    return
-                    
-                })
-                
-                
-                
-            })
-            
-            task.resume()
-        }
+            var theSession = NSURLSession.sharedSession()
+            userView.userModel = userAvail
         
+            // Get Image
+        
+            if let url = NSURL( string: userAvail.profile_picture )
+            {
+                var task : NSURLSessionDataTask =  theSession.dataTaskWithURL(url, completionHandler: {
+                
+                    (data, response, error) -> Void in
+                
+                    if data != nil
+                    {
+                    
+                        dispatch_async(dispatch_get_main_queue(),{
+                        
+                            if let getImg = UIImage(data: data)
+                            {
+                                userView.imageView!.image = getImg
+                            }
+                            else
+                            {
+                                userView.imageView!.image =  UIImage(named: "sf_icon")
+                            }
+                            UIView.animateWithDuration(1.0, delay: 0.8, options: UIViewAnimationOptions.CurveLinear, animations: {   () -> Void in
+                        
+                                userView.usernameLabel!.text = userAvail.username
+                                userView.usernameLabel!.alpha = 1.0
+                        
+                                }
+                                , completion: {   (done) -> Void in
+                            
+                            
+                            })
+                    
+                            return
+                    
+                        })
+                }
+                
+                
+                })
+            
+                task.resume()
+            }
+        }
+        else
+        {
+            userView.imageView!.image =  UIImage(named: "sf_icon")
+        }
         
     }
     
@@ -271,29 +288,7 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
             
             self.shakeView( theView )
         }
-        else
-        {
-        
-            if(theView.selected > 1 )
-            {
-                theView.frame = CGRectMake(5, 5, 90, 90)
-                //if(self.panGR != nil)
-                //{
-                    //theView.removeGestureRecognizer(self.panGR!)
-                
-                    //self.panGR = nil
-                //}
-                //else
-                //{
-                    
-                    
-//--->>
-                //}
-            }
-            
-            
-            
-        }
+
         
         theView.selected++
     }
@@ -310,21 +305,23 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
         UIView.animateWithDuration(0.25, animations: {
             
             ()-> Void in
-            
-            //theView.frame = CGRectMake(translation.x, translation.y, theView.frame.size.width, theView.frame.size.height)
         
             theImg.frame = CGRectMake(translation.x, translation.y, theImg.frame.size.width, theImg.frame.size.height)
         })
         
-        //var boundsMoving = theView.convertRect(theView.bounds, toView: nil)
+        
         var imgMoving = theImg.convertRect(theImg.bounds, toView: nil)
         var mainUserView = self.mainUserNode.convertRect(self.mainUserNode.bounds, toView: nil)
         
-        //var areaOfIntersection = CGRectIntersection(boundsMoving, mainUserView)
+        
         var areaOfIntersection = CGRectIntersection(imgMoving, mainUserView)
-        //if(areaOfIntersection.size.width > theView.frame.size.width/2 || areaOfIntersection.size.height > theView.frame.size.height/2)
+        
         if(areaOfIntersection.size.width > theImg.frame.size.width/2 || areaOfIntersection.size.height > theImg.frame.size.height/2)
         {
+            //reset for the new user in view
+            theView.selected = 0
+            
+            
             var ind : Int = (theView.tag % 10) - 2
             
             var goBack  = CGRectMake(theView.originalFrame!.origin.x, theView.originalFrame!.origin.y, theView.originalFrame!.size.width, theView.originalFrame!.size.height)
@@ -333,12 +330,10 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
                 
                 ()-> Void in
                 
-                //theView.frame = goBack
                 theImg.frame = CGRectMake(5, 5, 90, 90)
             })
             
             
- //----->>  Use self.refreshViews() and replace self.searchedUser with the Model_User you picked
             var allContactNodes : [ VMUser ] = [ followsMiddleNode, followsLeftNode, followsRightNode,
                 followedByMiddleNode, followedByLeftNode, followedByRightNode ]
             
@@ -421,27 +416,32 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
                 
                 let jsonData: AnyObject = NSJSONSerialization.JSONObjectWithData( data, options: NSJSONReadingOptions.MutableContainers, error: nil )!
                 
-//-->> Check meta first
-                var array : NSMutableArray = jsonData.objectForKey("data")! as! NSMutableArray
-                
-                for eachUser in array
+                if (jsonData.objectForKey("meta")!.objectForKey("code") as! Int) == 200
                 {
-                    var u : Model_User = Model_User(id: eachUser.objectForKey("id") as! String,
-                        username: eachUser.objectForKey("username") as! String,
-                        full_name: eachUser.objectForKey("full_name") as! String,
-                        profile_picture: eachUser.objectForKey("profile_picture") as! String)
+
+                    var array : NSMutableArray = jsonData.objectForKey("data")! as! NSMutableArray
+                
+                    for eachUser in array
+                    {
+                        var u : Model_User = Model_User(id: eachUser.objectForKey("id") as! String,
+                            username: eachUser.objectForKey("username") as! String,
+                            full_name: eachUser.objectForKey("full_name") as! String,
+                            profile_picture: eachUser.objectForKey("profile_picture") as! String)
                     
                     
-                    self.theGraph.userInFocus.myTopContacts[contactsFollows]?.append(u)
+                        self.theGraph.userInFocus.myTopContacts[contactsFollows]?.append(u)
+                    }
+                
+                    NSLog("Follows : \n\n\(self.theGraph.userInFocus.myTopContacts[contactsFollows]?.count)\n")
+                
+                    //********
+                    self.loadUserViews( 1 )
+                    //********
+                
+                    self.lastFollowsIndex = 2
                 }
                 
-                NSLog("Follows : \n\n\(self.theGraph.userInFocus.myTopContacts[contactsFollows]?.count)\n")
-                
-     //********
-                self.loadUserViews( 1 )
-     //********           
-                
-                self.lastFollowsIndex = 2
+
                 
             }).resume()
             
@@ -464,27 +464,37 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
                 
                 let jsonData : AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
                 
-                var array : NSMutableArray = jsonData.objectForKey("data")! as! NSMutableArray
-                
-                for eachUser in array
+                if (jsonData.objectForKey("meta")!.objectForKey("code") as! Int) == 200
                 {
-                    var u : Model_User = Model_User(id: eachUser.objectForKey("id") as! String,
-                        username: eachUser.objectForKey("username") as! String,
-                        full_name: eachUser.objectForKey("full_name") as! String,
-                        profile_picture: eachUser.objectForKey("profile_picture") as! String)
+                    var array : NSMutableArray = jsonData.objectForKey("data")! as! NSMutableArray
+                
+                    for eachUser in array
+                    {
+                        var u : Model_User = Model_User(id: eachUser.objectForKey("id") as! String,
+                            username: eachUser.objectForKey("username") as! String,
+                            full_name: eachUser.objectForKey("full_name") as! String,
+                            profile_picture: eachUser.objectForKey("profile_picture") as! String)
                     
                     
-                    self.theGraph.userInFocus.myTopContacts[contactsFollowedBy]?.append( u )
+                        self.theGraph.userInFocus.myTopContacts[contactsFollowedBy]?.append( u )
+                    }
+                
+                    NSLog("Followed By : \n\n\(self.theGraph.userInFocus.myTopContacts[contactsFollowedBy]?.count)\n")
+                
+                
+                    // load contacts' pictures and username when ready
+                    self.loadUserViews( 2 )
+
+                
+                    self.lastFollowedByIndex = 2
                 }
-                
-                NSLog("Followed By : \n\n\(self.theGraph.userInFocus.myTopContacts[contactsFollowedBy]?.count)\n")
-                
-                
-    //********
-                self.loadUserViews( 2 )
-    //********
-                
-                self.lastFollowedByIndex = 2
+                else
+                {
+                    
+//--> show no picture or sth
+                    
+                    
+                }
                 
             }).resume()
             
@@ -505,32 +515,34 @@ class GraphViewController : UIViewController, UISearchBarDelegate, UIGestureReco
                 
                 let jsonData : AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
                 
-                self.results = [Model_User]()
-                for eachUser in (jsonData.objectForKey("data") as! NSMutableArray)
+                if (jsonData.objectForKey("meta")!.objectForKey("code") as! Int) == 200
                 {
-                    var firstName = ""
-                    if(eachUser.objectForKey("first_name") != nil)
+                    self.results = [Model_User]()
+                    for eachUser in (jsonData.objectForKey("data") as! NSMutableArray)
                     {
-                        firstName = eachUser.objectForKey("first_name") as! String
-                    }
+                        var firstName = ""
+                        if(eachUser.objectForKey("first_name") != nil)
+                        {
+                            firstName = eachUser.objectForKey("first_name") as! String
+                        }
                     
-                    var lastName = ""
-                    if(eachUser.objectForKey("last_name") != nil)
-                    {
-                        lastName = eachUser.objectForKey("last_name") as! String
-                    }
+                        var lastName = ""
+                        if(eachUser.objectForKey("last_name") != nil)
+                        {
+                            lastName = eachUser.objectForKey("last_name") as! String
+                        }
                     
-                    self.results?.append(
-                        Model_User(        id: eachUser.objectForKey("id") as! String,
-                                           username: eachUser.objectForKey("username") as! String,
-                                           profile_picture: eachUser.objectForKey("profile_picture") as! String,
-                                           first_name: firstName,
-                                           last_name: lastName
+                        self.results?.append(
+                            Model_User(        id: eachUser.objectForKey("id") as! String,
+                                                username: eachUser.objectForKey("username") as! String,
+                                                profile_picture: eachUser.objectForKey("profile_picture") as! String,
+                                                first_name: firstName,
+                                                last_name: lastName
+                            )
                         )
-                    )
-                }
+                    }
             
-                
+                }
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     
